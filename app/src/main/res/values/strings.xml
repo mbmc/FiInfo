@@ -1,0 +1,50 @@
+<resources>
+
+    <string name="app_name">Fi Info</string>
+
+    <!-- Generic -->
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="carrier_auto">Auto</string>
+    <string name="carrier_next">Next</string>
+    <string name="carrier_repair">Repair</string>
+    <string name="carrier_sprint">Sprint</string>
+    <string name="carrier_t_mobile">T-Mobile</string>
+
+    <string name="clear">Clear events</string>
+
+    <string name="code">Code</string>
+    <string name="code_dialer">&#42;&#35;&#42;&#35;%1$s&#35;&#42;&#35;&#42;</string>
+    <string name="code_instructions">Unlike regular secret codes, Project Fi\'s can\'t be executed directly. Upon selecting an option, the Dialer will show-up and you\'ll have to paste the code that was automatically copied into the clipboard.</string>
+    <string name="code_instructions_hide">Don\'t show me again</string>
+
+    <string name="event_boot">Phone on</string>
+    <string name="event_disconnect">Disconnected</string>
+    <string name="event_manual_switch">Manual switch</string>
+    <string name="event_mobile">Mobile</string>
+    <string name="event_shutdown">Phone off</string>
+    <string name="event_unknown">Unknown</string>
+    <string name="event_wifi">Wifi</string>
+
+    <string name="event_count">%1$s %2$s recorded</string>
+    <plurals name="event">
+        <item quantity="zero">event</item>
+        <item quantity="one">event</item>
+        <item quantity="other">events</item>
+    </plurals>
+
+    <string name="filter_all">All</string>
+    <string name="filter_connectivity">Connectivity</string>
+
+    <string name="menu_enable_notifications">Enable notifications</string>
+    <string name="menu_disable_notifications">Disable notifications</string>
+    <string name="menu_filter">Display events</string>
+    <string name="menu_info">Sim info</string>
+    <string name="menu_carrier">Switch carrier</string>
+
+    <string name="state_connected">Currently connected to: %1$s [%2$s]</string>
+    <string name="state_disconnected">Currently not connected</string>
+    <string name="state_mobile">Mobile network: %1$s [%2$s]</string>
+
+</resources>

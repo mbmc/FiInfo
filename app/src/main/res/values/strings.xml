@@ -12,7 +12,7 @@
     <string name="carrier_sprint">Sprint</string>
     <string name="carrier_t_mobile">T-Mobile</string>
 
-    <string name="clear">Clear events</string>
+    <string name="clear">Clear all events?</string>
 
     <string name="code">Code</string>
     <string name="code_dialer">&#42;&#35;&#42;&#35;%1$s&#35;&#42;&#35;&#42;</string>
@@ -21,27 +21,31 @@
 
     <string name="event_boot">Phone on</string>
     <string name="event_disconnect">Disconnected</string>
-    <string name="event_manual_switch">Manual switch</string>
     <string name="event_mobile">Mobile</string>
     <string name="event_shutdown">Phone off</string>
     <string name="event_unknown">Unknown</string>
     <string name="event_wifi">Wifi</string>
 
-    <string name="event_count">%1$s %2$s recorded</string>
-    <plurals name="event">
-        <item quantity="zero">event</item>
-        <item quantity="one">event</item>
-        <item quantity="other">events</item>
-    </plurals>
+    <string name="event_count">(%1$s records)</string>
 
+    <string name="filter">Display events</string>
     <string name="filter_all">All</string>
     <string name="filter_connectivity">Connectivity</string>
+    <string name="filter_current">Displaying %1$s events</string>
+
+    <string name="icon_filter">&#xf0b0;</string>
+    <string name="icon_stats">&#xf080;</string>
+    <string name="icon_trash">&#xf1f8;</string>
 
     <string name="menu_enable_notifications">Enable notifications</string>
     <string name="menu_disable_notifications">Disable notifications</string>
-    <string name="menu_filter">Display events</string>
     <string name="menu_info">Sim info</string>
     <string name="menu_carrier">Switch carrier</string>
+
+    <string name="stat_count">Count</string>
+    <string name="stat_name">Name</string>
+    <string name="stat_occurrences">Event occurrences</string>
+    <string name="stat_type">Type</string>
 
     <string name="state_connected">Currently connected to: %1$s [%2$s]</string>
     <string name="state_disconnected">Currently not connected</string>

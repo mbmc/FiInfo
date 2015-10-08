@@ -30,7 +30,7 @@ public class RefreshLayout extends SwipeRefreshLayout
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        ((RecyclerView) findViewById(R.id.main_recycler_view)).setScrollListener(this);
+        ((RecyclerView) findViewById(R.id.recycler_view)).setScrollListener(this);
     }
 
     @Override

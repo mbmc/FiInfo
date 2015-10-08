@@ -22,10 +22,4 @@
         app:showAsAction="never"
         />
 
-    <item
-        android:id="@+id/main_action_filter"
-        android:title="@string/menu_filter"
-        app:showAsAction="always"
-        />
-
 </menu>

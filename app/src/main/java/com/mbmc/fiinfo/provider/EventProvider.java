@@ -19,19 +19,21 @@ import java.util.Map;
 public class EventProvider extends ContentProvider {
 
     private static final String AUTHORITY = BuildConfig.APPLICATION_ID + ".provider";
-    private static final String PATH = "events";
-    private static final String URI_PATH = "content://" + AUTHORITY + "/" + PATH;
+    private static final String URI_PATH = "content://" + AUTHORITY + "/events";
 
     public static final Uri URI = Uri.parse(URI_PATH);
+    public static final Uri URI_COUNT = Uri.parse(URI_PATH + "/count");
 
     private static final int EVENTS = 1000;
     private static final int EVENT_ID = 10001;
+    private static final int EVENT_COUNT = 10002;
 
     private static final UriMatcher uriMatcher;
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(AUTHORITY, "events", EVENTS);
         uriMatcher.addURI(AUTHORITY, "events/#", EVENT_ID);
+        uriMatcher.addURI(AUTHORITY, "events/count", EVENT_COUNT);
     }
 
     private Database database;
@@ -50,6 +52,7 @@ public class EventProvider extends ContentProvider {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(Database.TABLE_EVENT);
 
+        Cursor cursor = null;
         switch (uriMatcher.match(uri)) {
             case EVENTS:
                 queryBuilder.setProjectionMap(map);
@@ -59,12 +62,20 @@ public class EventProvider extends ContentProvider {
                 queryBuilder.appendWhere(Database.COLUMN_ID + "=" + uri.getLastPathSegment());
                 break;
 
+            case EVENT_COUNT:
+                cursor = sqLiteDatabase.rawQuery("SELECT count(*) AS count, _id, type, name, speed" +
+                        " FROM event GROUP BY type, name, speed" +
+                        " ORDER BY count DESC", null);
+                break;
+
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
-        sortOrder = "date desc";
-        Cursor cursor = queryBuilder.query(sqLiteDatabase, projection, selection,
-                selectionArgs, null, null, sortOrder);
+        if (cursor == null) {
+            sortOrder = "date desc";
+            cursor = queryBuilder.query(sqLiteDatabase, projection, selection,
+                    selectionArgs, null, null, sortOrder);
+        }
 
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
 

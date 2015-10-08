@@ -21,14 +21,14 @@ public class Database extends SQLiteOpenHelper {
 
     private static final int VERSION = 1;
 
-    private static final String DATABASE_CREATE = "create table "
-            + TABLE_EVENT + "(" + COLUMN_ID + " integer primary key autoincrement, "
-            + COLUMN_TYPE + " integer not null, "
-            + COLUMN_DATE + " integer not null, "
-            + COLUMN_TIME_ZONE + " text not null, "
-            + COLUMN_COUNTRY + " text not null, "
-            + COLUMN_NAME + " text, "
-            + COLUMN_SPEED + " text"
+    private static final String DATABASE_CREATE = "CREATE TABLE "
+            + TABLE_EVENT + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + COLUMN_TYPE + " INTEGER NOT NULL, "
+            + COLUMN_DATE + " INTEGER NOT NULL, "
+            + COLUMN_TIME_ZONE + " TEXT NOT NULL, "
+            + COLUMN_COUNTRY + " TEXT NOT NULL, "
+            + COLUMN_NAME + " TEXT, "
+            + COLUMN_SPEED + " TEXT"
             + ");";
 
 

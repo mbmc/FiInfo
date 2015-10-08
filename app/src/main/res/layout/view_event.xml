@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/event_date"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         />
 
@@ -16,20 +16,11 @@
         />
 
     <TextView
-        android:id="@+id/event_type"
+        android:id="@+id/event_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
-
-    <Space
-        android:layout_width="10dp"
-        android:layout_height="match_parent"
-        />
-
-    <TextView
-        android:id="@+id/event_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:ellipsize="end"
         />
 
 </LinearLayout>

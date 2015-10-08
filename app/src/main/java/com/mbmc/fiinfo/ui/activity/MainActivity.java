@@ -1,6 +1,7 @@
 package com.mbmc.fiinfo.ui.activity;
 
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.LoaderManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -10,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -31,6 +33,7 @@ import com.mbmc.fiinfo.helper.PreferencesManager;
 import com.mbmc.fiinfo.provider.EventProvider;
 import com.mbmc.fiinfo.ui.adapter.EventAdapter;
 import com.mbmc.fiinfo.ui.component.RefreshLayout;
+import com.mbmc.fiinfo.ui.fragment.StatsFragment;
 import com.mbmc.fiinfo.util.ConnectivityUtil;
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.util.StringUtil;
@@ -59,12 +62,17 @@ public class MainActivity extends AppCompatActivity
     };
 
     @Bind(R.id.main_refresh) RefreshLayout refreshLayout;
-    @Bind(R.id.main_recycler_view) RecyclerView recyclerView;
+    @Bind(R.id.recycler_view) RecyclerView recyclerView;
     @Bind(R.id.main_state) TextView state;
     @Bind(R.id.main_state_mobile) TextView mobile;
     @Bind(R.id.main_count) TextView count;
+    @Bind(R.id.main_filter) TextView filter;
+    @Bind(R.id.main_current_filter) TextView currentFilter;
+    @Bind(R.id.main_stats) TextView stats;
+    @Bind(R.id.main_clear) TextView clear;
 
-    private AlertDialog filter, carrier;
+    private AlertDialog filterPicker, carrierPicker, clearEvents;
+    private DialogFragment statsFragment;
     private String selection = "";
     private EventAdapter eventAdapter;
 
@@ -107,16 +115,12 @@ public class MainActivity extends AppCompatActivity
                 setNotificationMenu(menuItem);
                 return true;
 
-            case R.id.main_action_filter:
-                filter.show();
-                return true;
-
             case R.id.main_action_info:
                 sendCode(Code.INFO.code);
                 return true;
 
             case R.id.main_action_carrier:
-                carrier.show();
+                carrierPicker.show();
                 return true;
 
             default:
@@ -145,8 +149,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         refreshLayout.stopAnimation();
-        count.setText(getString(R.string.event_count, cursor.getCount(),
-                getResources().getQuantityString(R.plurals.event, cursor.getCount())));
+        count.setText(getString(R.string.event_count, cursor.getCount()));
         eventAdapter.swapCursor(MainActivity.this, cursor);
     }
 
@@ -160,9 +163,19 @@ public class MainActivity extends AppCompatActivity
         getLoaderManager().restartLoader(URL_LOADER, null, this);
     }
 
+    @OnClick(R.id.main_stats)
+    void stats() {
+        statsFragment.show(getFragmentManager(), "stats");
+    }
+
+    @OnClick(R.id.main_filter)
+    void filter() {
+        filterPicker.show();
+    }
+
     @OnClick(R.id.main_clear)
     void clear() {
-        getContentResolver().delete(EventProvider.URI, null, null);
+        clearEvents.show();
     }
 
     public void onEvent(Listener.Connectivity connectivity) {
@@ -171,8 +184,18 @@ public class MainActivity extends AppCompatActivity
 
 
     private void setupUi(Bundle bundle) {
-        setupFilterPicked();
+        setupFilterPicker();
         setupCodePicker();
+        setupClearEvents();
+
+        setCurrentFilter(R.string.filter_all);
+
+        Typeface font = Typeface.createFromAsset(getAssets(), "fontawesome-webfont.ttf");
+        stats.setTypeface(font);
+        filter.setTypeface(font);
+        clear.setTypeface(font);
+
+        statsFragment = new StatsFragment();
 
         refreshLayout.setRefreshListener(this);
 
@@ -188,26 +211,47 @@ public class MainActivity extends AppCompatActivity
         for (int i = 0 ; i < size; ++i) {
             titles[i] = getString(codes.get(i).labelId);
         }
-        carrier = new AlertDialog.Builder(this)
+        carrierPicker = new AlertDialog.Builder(this)
                 .setItems(titles, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialogInterface, int which) {
                         sendCode(Code.values()[which].code);
                     }
                 })
                 .create();
     }
 
-    private void setupFilterPicked() {
+    private void setupFilterPicker() {
         int size = Filter.values().length;
         CharSequence[] titles = new CharSequence[size];
         for (int i = 0 ; i < size; ++i) {
             titles[i] = getString(Filter.values()[i].stringId);
         }
-        filter = new AlertDialog.Builder(this)
+        filterPicker = new AlertDialog.Builder(this)
+                .setTitle(R.string.filter)
                 .setItems(titles, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        selection = Filter.values()[which].selection;
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        Filter filter = Filter.values()[which];
+                        selection = filter.selection;
+                        setCurrentFilter(filter.stringId);
                         onRefresh();
+                    }
+                })
+                .create();
+    }
+
+    private void setupClearEvents() {
+        clearEvents = new AlertDialog.Builder(this)
+                .setTitle(R.string.clear)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        getContentResolver().delete(EventProvider.URI, null, null);
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
                     }
                 })
                 .create();
@@ -253,12 +297,12 @@ public class MainActivity extends AppCompatActivity
 
     private void showCodeInstructions(final int code) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = getLayoutInflater().inflate(R.layout.view_code_instructions, null);
+        View view = View.inflate(this, R.layout.view_code_instructions, null);
         final CheckBox checkBox = (CheckBox) view.findViewById(R.id.code_instructions_check_box);
         builder.setView(view)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int id) {
+                    public void onClick(DialogInterface dialogInterface, int id) {
                         if (checkBox.isChecked()) {
                             PreferencesManager.getInstance(MainActivity.this)
                                     .setBoolean(Constants.HIDE_CODE_INSTRUCTIONS, true);
@@ -267,8 +311,8 @@ public class MainActivity extends AppCompatActivity
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
+                    public void onClick(DialogInterface dialogInterface, int id) {
+                        dialogInterface.dismiss();
                     }
                 })
                 .show();
@@ -282,7 +326,13 @@ public class MainActivity extends AppCompatActivity
 
     private void openDialer(int code) {
         copyCode(code);
-        startActivity(new Intent(Intent.ACTION_DIAL));
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        //intent.setData(Uri.parse("tel:"));
+        startActivity(intent);
+    }
+
+    private void setCurrentFilter(int resId) {
+        currentFilter.setText(getString(R.string.filter_current, getString(resId)));
     }
 
 }

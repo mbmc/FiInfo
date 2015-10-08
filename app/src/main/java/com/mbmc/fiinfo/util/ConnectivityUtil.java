@@ -9,6 +9,7 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.telephony.TelephonyManager;
 
+import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.data.ConnectivityEvent;
 import com.mbmc.fiinfo.data.Event;
 import com.mbmc.fiinfo.data.MobileCarrier;
@@ -82,10 +83,10 @@ public class ConnectivityUtil {
         }
 
         String sim = telephonyManager.getSimOperator();
-        if (MobileCarrier.T_MOBILE.contains(sim)) {
-            return "T-Mobile";
-        } else if (MobileCarrier.SPRINT.contains(sim)) {
-            return "Sprint";
+        if (MobileCarrier.SPRINT.contains(sim)) {
+            return context.getString(R.string.carrier_sprint);
+        } else if (MobileCarrier.T_MOBILE.contains(sim)) {
+            return context.getString(R.string.carrier_t_mobile);
         }
         return telephonyManager.getSimOperatorName();
     }

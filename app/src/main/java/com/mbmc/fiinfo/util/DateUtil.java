@@ -16,7 +16,7 @@ public class DateUtil {
         DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM,
                 DateFormat.MEDIUM, Locale.getDefault());
         dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
-        return dateFormat.format(ms*1000);
+        return dateFormat.format(ms);
     }
 
     public static boolean isLessThanOneSecond(long ms) {

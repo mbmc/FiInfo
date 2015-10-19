@@ -1,7 +1,6 @@
 package com.mbmc.fiinfo.ui.activity;
 
 import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.app.LoaderManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -33,6 +32,7 @@ import com.mbmc.fiinfo.helper.PreferencesManager;
 import com.mbmc.fiinfo.provider.EventProvider;
 import com.mbmc.fiinfo.ui.adapter.EventAdapter;
 import com.mbmc.fiinfo.ui.component.RefreshLayout;
+import com.mbmc.fiinfo.ui.fragment.IconsFragment;
 import com.mbmc.fiinfo.ui.fragment.StatsFragment;
 import com.mbmc.fiinfo.util.ConnectivityUtil;
 import com.mbmc.fiinfo.R;
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity
             Database.COLUMN_TIME_ZONE,
             Database.COLUMN_COUNTRY,
             Database.COLUMN_NAME,
+            Database.COLUMN_MOBILE,
             Database.COLUMN_SPEED
     };
 
@@ -70,9 +71,11 @@ public class MainActivity extends AppCompatActivity
     @Bind(R.id.main_current_filter) TextView currentFilter;
     @Bind(R.id.main_stats) TextView stats;
     @Bind(R.id.main_clear) TextView clear;
+    @Bind(R.id.main_progress) View progress;
 
     private AlertDialog filterPicker, carrierPicker, clearEvents;
-    private DialogFragment statsFragment;
+    private StatsFragment statsFragment;
+    private IconsFragment iconsFragment;
     private String selection = "";
     private EventAdapter eventAdapter;
 
@@ -84,7 +87,7 @@ public class MainActivity extends AppCompatActivity
 
         ButterKnife.bind(this);
 
-        setupUi(savedInstanceState);
+        setupUi();
     }
 
     @Override
@@ -123,6 +126,10 @@ public class MainActivity extends AppCompatActivity
                 carrierPicker.show();
                 return true;
 
+            case R.id.main_action_icons:
+                iconsFragment.show(getFragmentManager(), "icons");
+                return true;
+
             default:
                 return super.onOptionsItemSelected(menuItem);
         }
@@ -149,6 +156,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         refreshLayout.stopAnimation();
+        progress.setVisibility(View.GONE);
         count.setText(getString(R.string.event_count, cursor.getCount()));
         eventAdapter.swapCursor(MainActivity.this, cursor);
     }
@@ -183,7 +191,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    private void setupUi(Bundle bundle) {
+    private void setupUi() {
         setupFilterPicker();
         setupCodePicker();
         setupClearEvents();
@@ -196,16 +204,16 @@ public class MainActivity extends AppCompatActivity
         clear.setTypeface(font);
 
         statsFragment = new StatsFragment();
+        iconsFragment = new IconsFragment();
 
         refreshLayout.setRefreshListener(this);
 
         recyclerView.setAdapter(eventAdapter = new EventAdapter());
-
-        getLoaderManager().initLoader(URL_LOADER, bundle, this);
+        getLoaderManager().initLoader(URL_LOADER, null, this);
     }
 
     private void setupCodePicker() {
-        List<Code> codes = Arrays.asList(Code.AUTO, Code.REPAIR, Code.NEXT, Code.SPRINT, Code.T_MOBILE);
+        final List<Code> codes = Arrays.asList(Code.AUTO, Code.REPAIR, Code.NEXT, Code.SPRINT, Code.T_MOBILE);
         int size = codes.size();
         CharSequence[] titles = new CharSequence[size];
         for (int i = 0 ; i < size; ++i) {
@@ -214,7 +222,7 @@ public class MainActivity extends AppCompatActivity
         carrierPicker = new AlertDialog.Builder(this)
                 .setItems(titles, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogInterface, int which) {
-                        sendCode(Code.values()[which].code);
+                        sendCode(codes.get(which).code);
                     }
                 })
                 .create();
@@ -279,20 +287,11 @@ public class MainActivity extends AppCompatActivity
     private void setCurrentState() {
         mobile.setVisibility(View.GONE);
         ConnectivityEvent connectivityEvent = ConnectivityUtil.getConnectivityEvent(this);
-        state.setText(StringUtil.getConnectionName(this, connectivityEvent));
-        if (connectivityEvent.event == Event.WIFI) {
-            setMobileName();
-        }
-    }
-
-    private void setMobileName() {
-        ConnectivityEvent connectivityEvent = ConnectivityUtil.getMobileConnectivityIfAny(this);
-        String name = connectivityEvent.name;
-        String speed = connectivityEvent.speed;
-        if (!name.isEmpty() && !speed.equals("Unknown")) {
+        if (connectivityEvent.event == Event.WIFI_MOBILE) {
             mobile.setVisibility(View.VISIBLE);
-            mobile.setText(getString(R.string.state_mobile, name, connectivityEvent.speed));
+            mobile.setText(getString(R.string.state_mobile, connectivityEvent.mobile, connectivityEvent.speed));
         }
+        state.setText(StringUtil.getConnectionName(this, connectivityEvent));
     }
 
     private void showCodeInstructions(final int code) {

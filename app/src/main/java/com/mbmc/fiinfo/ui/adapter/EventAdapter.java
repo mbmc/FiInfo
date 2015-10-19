@@ -1,89 +1,69 @@
 package com.mbmc.fiinfo.ui.adapter;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mbmc.fiinfo.R;
+import com.mbmc.fiinfo.constant.Constants;
 import com.mbmc.fiinfo.data.Event;
 import com.mbmc.fiinfo.helper.Database;
 import com.mbmc.fiinfo.util.DateUtil;
 
 
-public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    private CursorAdapter cursorAdapter;
-
+public class EventAdapter extends BaseCursorAdapter {
 
     @Override
-    public int getItemCount() {
-        if (cursorAdapter == null) {
-            return 0;
-        }
-        return cursorAdapter.getCount();
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = cursorAdapter.newView(parent.getContext(), cursorAdapter.getCursor(), parent);
+    public RecyclerView.ViewHolder createCursorViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.view_event, parent, false);
         return new EventViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        cursorAdapter.getCursor().moveToPosition(position);
+    public void bindCursorViewHolder(RecyclerView.ViewHolder holder, int position, Cursor cursor) {
         EventViewHolder viewHolder = (EventViewHolder) holder;
-        Context context = viewHolder.itemView.getContext();
-        Cursor cursor = cursorAdapter.getCursor();
 
-        viewHolder.date.setText(DateUtil.getDate(cursor.getInt(cursor.getColumnIndexOrThrow(Database.COLUMN_DATE)),
+        String date = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_DATE));
+        viewHolder.date.setText(DateUtil.getDate(Long.valueOf(date),
                 cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_TIME_ZONE))));
 
         Event event = Event.get(cursor.getInt(cursor.getColumnIndexOrThrow(Database.COLUMN_TYPE)));
-        String type = context.getString(event.stringId);
+        int iconId = event.iconId;
+        String info = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_NAME));
         switch (event) {
             case MOBILE:
-                type = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED));
+                iconId = Event.getMobileIcon(cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_NAME)));
+                info = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED));
+                break;
+
+            case WIFI_MOBILE:
+                String mobile = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_MOBILE));
+                iconId = Event.getWifiMobileIcon(mobile);
+                if (mobile.contains(Constants.SPRINT ) || mobile.contains(Constants.T_MOBILE)) {
+                    info = info + " / " + cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED));
+                } else {
+                    info = info + " / " + mobile + " [" + cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED)) + "]";
+                }
                 break;
         }
-        viewHolder.info.setText(type + " " + cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_NAME)));
-        cursorAdapter.bindView(holder.itemView, holder.itemView.getContext(), cursorAdapter.getCursor());
-    }
-
-    public void swapCursor(Context context, Cursor cursor) {
-        if (cursorAdapter == null) {
-            createAdapter(context, cursor);
-        }
-        cursorAdapter.swapCursor(cursor);
-        notifyDataSetChanged();
+        viewHolder.type.setImageResource(iconId);
+        viewHolder.info.setText(info);
     }
 
 
-    private void createAdapter(Context context, Cursor cursor) {
-        cursorAdapter = new CursorAdapter(context, cursor, 0) {
-            @Override
-            public View newView(Context context, Cursor cursor, ViewGroup parent) {
-                return LayoutInflater.from(context).inflate(R.layout.view_event, parent, false);
-            }
-
-            @Override
-            public void bindView(View view, Context context, Cursor cursor) {
-
-            }
-        };
-    }
-
-    private static class EventViewHolder extends RecyclerView.ViewHolder{
+    private static class EventViewHolder extends RecyclerView.ViewHolder {
         TextView date, info;
+        ImageView type;
 
         public EventViewHolder(View itemView) {
             super(itemView);
             date = (TextView) itemView.findViewById(R.id.event_date);
+            type = (ImageView) itemView.findViewById(R.id.event_type);
             info = (TextView) itemView.findViewById(R.id.event_info);
         }
     }

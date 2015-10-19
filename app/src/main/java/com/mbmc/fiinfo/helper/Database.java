@@ -15,19 +15,21 @@ public class Database extends SQLiteOpenHelper {
     public static final String COLUMN_TIME_ZONE = "timeZone";
     public static final String COLUMN_COUNTRY = "country";
     public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_MOBILE = "mobile";
     public static final String COLUMN_SPEED = "speed";
 
     public static final String NAME = "events";
 
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
 
     private static final String DATABASE_CREATE = "CREATE TABLE "
             + TABLE_EVENT + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_TYPE + " INTEGER NOT NULL, "
-            + COLUMN_DATE + " INTEGER NOT NULL, "
+            + COLUMN_DATE + " TEXT NOT NULL, "
             + COLUMN_TIME_ZONE + " TEXT NOT NULL, "
             + COLUMN_COUNTRY + " TEXT NOT NULL, "
             + COLUMN_NAME + " TEXT, "
+            + COLUMN_MOBILE + " TEXT, "
             + COLUMN_SPEED + " TEXT"
             + ");";
 
@@ -43,7 +45,9 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-
+        if (oldVersion == 1 && newVersion == 2) {
+            sqLiteDatabase.delete(Database.TABLE_EVENT, null, null);
+        }
     }
 
 }

@@ -26,20 +26,19 @@ public class NotificationManager {
         }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setSmallIcon(connectivityEvent.event.iconId);
         builder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS);
         builder.setAutoCancel(true);
         builder.setContentTitle(context.getString(R.string.app_name));
 
         String string = StringUtil.getConnectionName(context, connectivityEvent);
-        if (connectivityEvent.event == Event.WIFI) {
-            ConnectivityEvent mobileEvent = ConnectivityUtil.getMobileConnectivityIfAny(context);
-            String name = mobileEvent.name;
-            String speed = mobileEvent.speed;
-            if (!name.isEmpty() && !speed.equals("Unknown")) {
-                string += "\n" + context.getString(R.string.state_mobile, name, mobileEvent.speed);
-                builder.setStyle(new NotificationCompat.BigTextStyle().bigText(string));
-            }
+        if (connectivityEvent.event == Event.MOBILE) {
+            builder.setSmallIcon(Event.getMobileIcon(connectivityEvent.name));
+        } else if (connectivityEvent.event == Event.WIFI_MOBILE) {
+            string += "\n" + context.getString(R.string.state_mobile, connectivityEvent.mobile,
+                    connectivityEvent.speed);
+            builder.setStyle(new NotificationCompat.BigTextStyle().bigText(string));
+            builder.setSmallIcon(Event.getWifiMobileIcon(connectivityEvent.mobile));
         }
         builder.setContentText(string);
 

@@ -22,4 +22,10 @@
         app:showAsAction="never"
         />
 
+    <item
+        android:id="@+id/main_action_icons"
+        android:title="@string/menu_icons"
+        app:showAsAction="never"
+        />
+
 </menu>

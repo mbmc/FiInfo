@@ -1,33 +1,56 @@
 package com.mbmc.fiinfo.data;
 
 import com.mbmc.fiinfo.R;
+import com.mbmc.fiinfo.constant.Constants;
 
 
 public enum Event {
 
-    NONE(R.string.event_unknown),
-    BOOT(R.string.event_boot),
-    DISCONNECT(R.string.event_disconnect),
-    MOBILE(R.string.event_mobile),
-    SHUTDOWN(R.string.event_shutdown),
-    WIFI(R.string.event_wifi);
+    NONE(R.string.event_unknown, 0),
+    AIRPLANE_ON(R.string.event_airplane_on, R.drawable.ic_airplane_on),
+    AIRPLANE_OFF(R.string.event_airplane_off, R.drawable.ic_airplane_off),
+    BOOT(R.string.event_boot, R.drawable.ic_phone_on),
+    DISCONNECT(R.string.event_disconnect, 0),
+    MOBILE(R.string.event_mobile, R.drawable.ic_mobile),
+    MOBILE_OFF(R.string.event_mobile_off, R.drawable.ic_mobile_off),
+    SHUTDOWN(R.string.event_shutdown, R.drawable.ic_phone_off),
+    WIFI(R.string.event_wifi, R.drawable.ic_wifi),
+    WIFI_MOBILE(R.string.event_wifi_mobile, R.drawable.ic_wifi_mobile),
+    WIFI_ON(R.string.event_wifi_on, R.drawable.ic_wifi_on),
+    WIFI_OFF(R.string.event_wifi_off, R.drawable.ic_wifi_off);
 
-    public int stringId;
+    public int labelId, iconId;
 
 
-    Event(int stringId) {
-        this.stringId = stringId;
+    Event(int labelId, int iconId) {
+        this.labelId = labelId;
+        this.iconId = iconId;
     }
 
     public static Event get(int type) {
-        switch (type){
-            case 1: return BOOT;
-            case 2: return DISCONNECT;
-            case 3: return MOBILE;
-            case 4: return SHUTDOWN;
-            case 5: return WIFI;
+        try {
+            return Event.values()[type];
+        } catch (Exception exception) {
+            return NONE;
         }
-        return NONE;
+    }
+
+    public static int getMobileIcon(String string) {
+        if (string.contains(Constants.SPRINT)) {
+            return R.drawable.ic_sprint;
+        } else if (string.contains(Constants.T_MOBILE)) {
+            return R.drawable.ic_t_mobile;
+        }
+        return R.drawable.ic_mobile;
+    }
+
+    public static int getWifiMobileIcon(String string) {
+        if (string.contains(Constants.SPRINT)) {
+            return R.drawable.ic_wifi_sprint;
+        } else if (string.contains(Constants.T_MOBILE)) {
+            return R.drawable.ic_wifi_t_mobile;
+        }
+        return R.drawable.ic_wifi_mobile;
     }
 
 }

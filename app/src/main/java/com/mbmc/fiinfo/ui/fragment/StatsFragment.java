@@ -28,6 +28,7 @@ public class StatsFragment extends DialogFragment
 
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
     @Bind(R.id.stats_refresh) RefreshLayout refreshLayout;
+    @Bind(R.id.stats_progress) View progress;
 
     private StatAdapter eventAdapter;
 
@@ -44,8 +45,7 @@ public class StatsFragment extends DialogFragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         recyclerView.setAdapter(eventAdapter = new StatAdapter());
         refreshLayout.setRefreshListener(this);
-
-        getLoaderManager().initLoader(URL_LOADER, savedInstanceState, this);
+        getLoaderManager().initLoader(URL_LOADER, null, this);
     }
 
     @Override
@@ -75,6 +75,7 @@ public class StatsFragment extends DialogFragment
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         refreshLayout.stopAnimation();
+        progress.setVisibility(View.GONE);
         eventAdapter.swapCursor(getActivity(), cursor);
     }
 

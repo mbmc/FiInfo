@@ -13,7 +13,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
-        android:name=".Application"
         >
         <activity
             android:name=".ui.activity.MainActivity"
@@ -24,6 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".receiver.AirplaneModeReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.AIRPLANE_MODE"/>
+            </intent-filter>
+        </receiver>
         <receiver android:name=".receiver.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -34,17 +38,26 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".receiver.ServiceChangeReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.SERVICE_STATE" />
+            </intent-filter>
+        </receiver>
         <receiver android:name=".receiver.ShutdownReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_SHUTDOWN" />
             </intent-filter>
         </receiver>
-        <service android:name=".service.TelephonyService" android:enabled="true" />
+        <receiver android:name=".receiver.WifiChangeReceiver" >
+            <intent-filter>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
         <provider
             android:name=".provider.EventProvider"
             android:exported="false"
-            android:authorities="com.mbmc.fiinfo.provider">
-        </provider>
+            android:authorities="com.mbmc.fiinfo.provider"
+            />
 
     </application>
 

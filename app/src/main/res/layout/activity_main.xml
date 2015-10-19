@@ -91,9 +91,7 @@
                     android:id="@+id/main_clear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
+                    android:padding="10dp"
                     android:text="@string/icon_trash"
                     android:textSize="@dimen/icon_font_size"
                     />
@@ -107,12 +105,26 @@
             android:layout_height="10dp"
             />
 
-        <com.mbmc.fiinfo.ui.component.RecyclerView
-            android:id="@+id/recycler_view"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            />
+            >
+
+            <com.mbmc.fiinfo.ui.component.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                />
+
+            <ProgressBar
+                android:id="@+id/main_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                />
+
+        </FrameLayout>
 
     </LinearLayout>
 

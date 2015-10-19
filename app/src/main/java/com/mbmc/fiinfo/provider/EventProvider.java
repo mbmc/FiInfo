@@ -23,10 +23,12 @@ public class EventProvider extends ContentProvider {
 
     public static final Uri URI = Uri.parse(URI_PATH);
     public static final Uri URI_COUNT = Uri.parse(URI_PATH + "/count");
+    public static final Uri URI_LAST = Uri.parse(URI_PATH + "/last");
 
     private static final int EVENTS = 1000;
     private static final int EVENT_ID = 10001;
     private static final int EVENT_COUNT = 10002;
+    private static final int EVENT_LAST = 10003;
 
     private static final UriMatcher uriMatcher;
     static {
@@ -34,6 +36,7 @@ public class EventProvider extends ContentProvider {
         uriMatcher.addURI(AUTHORITY, "events", EVENTS);
         uriMatcher.addURI(AUTHORITY, "events/#", EVENT_ID);
         uriMatcher.addURI(AUTHORITY, "events/count", EVENT_COUNT);
+        uriMatcher.addURI(AUTHORITY, "events/last", EVENT_LAST);
     }
 
     private Database database;
@@ -63,16 +66,20 @@ public class EventProvider extends ContentProvider {
                 break;
 
             case EVENT_COUNT:
-                cursor = sqLiteDatabase.rawQuery("SELECT count(*) AS count, _id, type, name, speed" +
-                        " FROM event GROUP BY type, name, speed" +
+                cursor = sqLiteDatabase.rawQuery("SELECT count(*) AS count, _id, type, name, mobile, speed" +
+                        " FROM event GROUP BY type, name, mobile, speed" +
                         " ORDER BY count DESC", null);
+                break;
+
+            case EVENT_LAST:
+                cursor = sqLiteDatabase.rawQuery("SELECT _id, type, date, name, mobile, speed FROM event ORDER BY date DESC LIMIT 1", null);
                 break;
 
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
         if (cursor == null) {
-            sortOrder = "date desc";
+            sortOrder = "date DESC";
             cursor = queryBuilder.query(sqLiteDatabase, projection, selection,
                     selectionArgs, null, null, sortOrder);
         }

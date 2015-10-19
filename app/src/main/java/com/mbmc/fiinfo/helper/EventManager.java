@@ -2,18 +2,28 @@ package com.mbmc.fiinfo.helper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 
 import com.mbmc.fiinfo.data.ConnectivityEvent;
 import com.mbmc.fiinfo.data.Event;
+import com.mbmc.fiinfo.event.Listener;
 import com.mbmc.fiinfo.provider.EventProvider;
 
 import java.util.Locale;
 import java.util.TimeZone;
 
+import de.greenrobot.event.EventBus;
+
 
 public class EventManager {
 
+    private static final Listener.Connectivity connectivity = new Listener.Connectivity();
+
     private static EventManager instance;
+
+    private int type;
+    private Integer previousType = null;
+    private String name, previousName = "", mobile, previousMobile = "", speed, previousSpeed = "";
 
 
     public static EventManager getInstance() {
@@ -24,12 +34,49 @@ public class EventManager {
     }
 
     public void log(Context context, Event event) {
-        log(context, event.ordinal(), "", "");
+        log(context, new ConnectivityEvent(event));
     }
 
-    public void log(Context context, ConnectivityEvent connectivityEvent) {
-        log(context, connectivityEvent.event.ordinal(),
-                connectivityEvent.name, connectivityEvent.speed);
+    public synchronized void log(Context context, ConnectivityEvent connectivityEvent) {
+        if (previousType == null) {
+            previousType = Event.NONE.ordinal();
+            Cursor cursor = context.getContentResolver().query(EventProvider.URI_LAST, null, null, null, null);
+            if (cursor != null && cursor.getCount() > 0) {
+                cursor.moveToPosition(0);
+                previousType = cursor.getInt(cursor.getColumnIndexOrThrow(Database.COLUMN_TYPE));
+                previousName = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_NAME));
+                previousMobile = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_MOBILE));
+                previousSpeed = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED));
+            }
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        type = connectivityEvent.event.ordinal();
+        name = connectivityEvent.name;
+        mobile = connectivityEvent.mobile;
+        speed = connectivityEvent.speed;
+        if (type == previousType
+                && name.equals(previousName)
+                && mobile.equals(previousMobile)
+                && speed.equals(previousSpeed)) {
+            return;
+        }
+
+        Event event = connectivityEvent.event;
+        if (EventBus.getDefault().hasSubscriberForEvent(Listener.Connectivity.class)) {
+            EventBus.getDefault().post(connectivity);
+        } else if (event == Event.MOBILE || event == Event.WIFI || event == Event.WIFI_MOBILE) {
+            NotificationManager.showNotification(context, connectivityEvent);
+        }
+
+        log(context, type, name, mobile, speed);
+
+        previousType = type;
+        previousName = name;
+        previousMobile = mobile;
+        previousSpeed = speed;
     }
 
 
@@ -37,13 +84,14 @@ public class EventManager {
 
     }
 
-    private void log(Context context, int type, String name, String speed) {
+    private void log(Context context, int type, String name, String mobile, String speed) {
         ContentValues values = new ContentValues();
         values.put(Database.COLUMN_TYPE, type);
-        values.put(Database.COLUMN_DATE, System.currentTimeMillis()/1000);
+        values.put(Database.COLUMN_DATE, String.valueOf(System.currentTimeMillis()));
         values.put(Database.COLUMN_TIME_ZONE, TimeZone.getDefault().getID());
         values.put(Database.COLUMN_COUNTRY, Locale.getDefault().getDisplayName());
         values.put(Database.COLUMN_NAME, name);
+        values.put(Database.COLUMN_MOBILE, mobile);
         values.put(Database.COLUMN_SPEED, speed);
         context.getContentResolver().insert(EventProvider.URI, values);
     }

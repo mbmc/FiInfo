@@ -5,6 +5,7 @@
     <!-- Generic -->
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
+    <string name="wifi">WiFi</string>
 
     <string name="carrier_auto">Auto</string>
     <string name="carrier_next">Next</string>
@@ -20,11 +21,21 @@
     <string name="code_instructions_hide">Don\'t show me again</string>
 
     <string name="event_boot">Phone on</string>
+    <string name="event_airplane_on">Airplane mode on</string>
+    <string name="event_airplane_off">Airplane mode off</string>
     <string name="event_disconnect">Disconnected</string>
-    <string name="event_mobile">Mobile</string>
+    <string name="event_mobile">Connected to a carrier</string>
+    <string name="event_mobile_off">Cell off</string>
+    <string name="event_mobile_sprint">Connected to Sprint</string>
+    <string name="event_mobile_t_mobile">Connected to T-Mobile</string>
     <string name="event_shutdown">Phone off</string>
     <string name="event_unknown">Unknown</string>
-    <string name="event_wifi">Wifi</string>
+    <string name="event_wifi">Connected to WiFi</string>
+    <string name="event_wifi_on">WiFi on</string>
+    <string name="event_wifi_off">WiFi off</string>
+    <string name="event_wifi_mobile">Connected to WiFi and a carrier</string>
+    <string name="event_wifi_sprint">Connected to WiFi and Sprint</string>
+    <string name="event_wifi_t_mobile">Connected to WiFi and T-Mobile</string>
 
     <string name="event_count">(%1$s records)</string>
 
@@ -37,13 +48,16 @@
     <string name="icon_stats">&#xf080;</string>
     <string name="icon_trash">&#xf1f8;</string>
 
+    <string name="icons_legend">Icons legend</string>
+
     <string name="menu_enable_notifications">Enable notifications</string>
     <string name="menu_disable_notifications">Disable notifications</string>
     <string name="menu_info">Sim info</string>
+    <string name="menu_icons">Icons</string>
     <string name="menu_carrier">Switch carrier</string>
 
     <string name="stat_count">Count</string>
-    <string name="stat_name">Name</string>
+    <string name="stat_info">Info</string>
     <string name="stat_occurrences">Event occurrences</string>
     <string name="stat_type">Type</string>
 

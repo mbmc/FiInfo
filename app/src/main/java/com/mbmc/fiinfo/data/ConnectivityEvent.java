@@ -5,6 +5,7 @@ public class ConnectivityEvent {
 
     public Event event;
     public String name;
+    public String mobile;
     public String speed;
 
 
@@ -17,8 +18,13 @@ public class ConnectivityEvent {
     }
 
     public ConnectivityEvent(Event event, String name, String speed) {
+        this(event, name, "", speed);
+    }
+
+    public ConnectivityEvent(Event event, String name, String mobile, String speed) {
         this.event = event;
         this.name = name;
+        this.mobile = mobile;
         this.speed = speed;
     }
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_alpha">#BBFFFFFF</color>
+    <color name="font">#8C000000</color>
+
+    <color name="fi_blue">#11C0D7</color>
+    <color name="fi_green">#25A667</color>
+    <color name="fi_yellow">#FFC30F</color>
+
+</resources>

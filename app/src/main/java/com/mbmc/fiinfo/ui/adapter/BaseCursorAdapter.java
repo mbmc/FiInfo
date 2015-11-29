@@ -44,6 +44,7 @@ public abstract class BaseCursorAdapter extends RecyclerView.Adapter<RecyclerVie
         notifyDataSetChanged();
     }
 
+
     private void createAdapter(Context context, Cursor cursor) {
         cursorAdapter = new CursorAdapter(context, cursor, 0) {
             @Override

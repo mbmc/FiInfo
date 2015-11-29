@@ -1,14 +1,13 @@
 package com.mbmc.fiinfo.ui.fragment;
 
-import android.app.DialogFragment;
+import android.app.Dialog;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.event.RefreshListener;
@@ -34,18 +33,18 @@ public class StatsFragment extends DialogFragment
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        getDialog().setTitle(R.string.stat_occurrences);
-        View view = inflater.inflate(R.layout.fragment_stats, container, false);
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        View view = View.inflate(getActivity(), R.layout.fragment_stats, null);
         ButterKnife.bind(this, view);
-        return view;
-    }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
         recyclerView.setAdapter(eventAdapter = new StatAdapter());
         refreshLayout.setRefreshListener(this);
         getLoaderManager().initLoader(URL_LOADER, null, this);
+
+        return new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme)
+                .setView(view)
+                .setTitle(R.string.stat_occurrences)
+                .create();
     }
 
     @Override

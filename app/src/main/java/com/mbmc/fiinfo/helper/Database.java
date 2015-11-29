@@ -20,7 +20,7 @@ public class Database extends SQLiteOpenHelper {
 
     public static final String NAME = "events";
 
-    private static final int VERSION = 2;
+    private static final int VERSION = 3;
 
     private static final String DATABASE_CREATE = "CREATE TABLE "
             + TABLE_EVENT + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -45,8 +45,13 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        if (oldVersion == 1 && newVersion == 2) {
-            sqLiteDatabase.delete(Database.TABLE_EVENT, null, null);
+        if (oldVersion < VERSION) {
+            try {
+                sqLiteDatabase.rawQuery("SELECT mobile FROM event LIMIT 1", null);
+            } catch (RuntimeException exception) {
+                sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_EVENT);
+                onCreate(sqLiteDatabase);
+            }
         }
     }
 

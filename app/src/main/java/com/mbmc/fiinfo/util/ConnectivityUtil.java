@@ -46,7 +46,7 @@ public class ConnectivityUtil {
         return new ConnectivityEvent(Event.DISCONNECT);
     }
 
-    // As listed in TelephonyManager
+    // As listed in TelephonyManager.java
     public static String getSpeed(int type) {
         switch (type) {
             case TelephonyManager.NETWORK_TYPE_1xRTT:  return "2G (1xRTT)";

@@ -10,7 +10,7 @@ public enum Event {
     AIRPLANE_ON(R.string.event_airplane_on, R.drawable.ic_airplane_on),
     AIRPLANE_OFF(R.string.event_airplane_off, R.drawable.ic_airplane_off),
     BOOT(R.string.event_boot, R.drawable.ic_phone_on),
-    DISCONNECT(R.string.event_disconnect, 0),
+    DISCONNECT(R.string.event_disconnect, R.drawable.ic_disconnect),
     MOBILE(R.string.event_mobile, R.drawable.ic_mobile),
     MOBILE_OFF(R.string.event_mobile_off, R.drawable.ic_mobile_off),
     SHUTDOWN(R.string.event_shutdown, R.drawable.ic_phone_off),

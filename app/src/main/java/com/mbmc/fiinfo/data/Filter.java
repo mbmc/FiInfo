@@ -9,7 +9,7 @@ public enum Filter {
     CONNECTIVITY(R.string.filter_connectivity,
             "type = " + Event.MOBILE.ordinal() + " OR type = " + Event.WIFI.ordinal()
                     + " OR type = " + Event.WIFI_MOBILE.ordinal()),
-    WIFI(R.string.event_wifi, "type = " + Event.WIFI.ordinal()
+    WIFI(R.string.wifi, "type = " + Event.WIFI.ordinal()
             + " OR type = " + Event.WIFI_MOBILE.ordinal()),
     SPRINT(R.string.carrier_sprint, "name LIKE '%Sprint%'"
             + " OR mobile LIKE '%Sprint%'"),

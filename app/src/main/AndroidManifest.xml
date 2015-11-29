@@ -17,6 +17,7 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
+            android:launchMode="singleTop"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +34,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".receiver.ConnectivityChangeReceiver" >
+        <receiver android:name=".receiver.ConnectivityChangeReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
@@ -48,7 +49,7 @@
                 <action android:name="android.intent.action.ACTION_SHUTDOWN" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".receiver.WifiChangeReceiver" >
+        <receiver android:name=".receiver.WifiChangeReceiver">
             <intent-filter>
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
             </intent-filter>
@@ -58,6 +59,24 @@
             android:exported="false"
             android:authorities="com.mbmc.fiinfo.provider"
             />
+        <receiver android:name="com.mbmc.fiinfo.widget.MiniWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_1x1"
+                />
+        </receiver>
+        <receiver android:name="com.mbmc.fiinfo.widget.WidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_4x1"
+                />
+        </receiver>
 
     </application>
 

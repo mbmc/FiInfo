@@ -1,6 +1,9 @@
 package com.mbmc.fiinfo.data;
 
+import org.parceler.Parcel;
 
+
+@Parcel
 public class ConnectivityEvent {
 
     public Event event;
@@ -8,6 +11,10 @@ public class ConnectivityEvent {
     public String mobile;
     public String speed;
 
+
+    public ConnectivityEvent() {
+        this(Event.NONE);
+    }
 
     public ConnectivityEvent(Event event) {
         this(event, "");

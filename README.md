@@ -4,15 +4,18 @@ Having a Project Fi Sim card?
 &#8226; Fi Info allows you to see and keep track of which network you're connected to (WiFi, Sprint, T-Mobile), and at which speed (2G, 3G, 4G).
 
 &#8226; Events recorded:
-- phone shutdown
-- phone boot up
-- connecting to WiFi
-- connecting to GSM
-- change of speed while on GSM
+- airplane mode on/off
+- phone on/off
+- WiFi on/off
+- connected to WiFi
+- connected to cell service
+- cell service speed change
 
-&#8226; Notifications will be triggered for any WiFi / GSM event.
+&#8226; 1x1 widget displaying current connectivity
 
-&#8226; PR welcome (especially design :)
+&#8226; 4x1 widget to switch carrier from home screen (configurable)
+
+&#8226; Notifications will be triggered for any WiFi, cell or disconnect event
 
 #### Screenshots
 

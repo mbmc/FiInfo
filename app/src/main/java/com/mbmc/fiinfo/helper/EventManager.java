@@ -8,6 +8,7 @@ import com.mbmc.fiinfo.data.ConnectivityEvent;
 import com.mbmc.fiinfo.data.Event;
 import com.mbmc.fiinfo.event.Listener;
 import com.mbmc.fiinfo.provider.EventProvider;
+import com.mbmc.fiinfo.util.ConnectivityUtil;
 
 import java.util.Locale;
 import java.util.TimeZone;
@@ -64,12 +65,7 @@ public class EventManager {
             return;
         }
 
-        Event event = connectivityEvent.event;
-        if (EventBus.getDefault().hasSubscriberForEvent(Listener.Connectivity.class)) {
-            EventBus.getDefault().post(connectivity);
-        } else if (event == Event.MOBILE || event == Event.WIFI || event == Event.WIFI_MOBILE) {
-            NotificationManager.showNotification(context, connectivityEvent);
-        }
+        sendUpdate(context, connectivityEvent);
 
         log(context, type, name, mobile, speed);
 
@@ -94,6 +90,31 @@ public class EventManager {
         values.put(Database.COLUMN_MOBILE, mobile);
         values.put(Database.COLUMN_SPEED, speed);
         context.getContentResolver().insert(EventProvider.URI, values);
+    }
+
+    private void sendUpdate(Context context, ConnectivityEvent connectivityEvent) {
+        Event event = connectivityEvent.event;
+        boolean subscribers = false;
+        if (EventBus.getDefault().hasSubscriberForEvent(Listener.Connectivity.class)) {
+            EventBus.getDefault().post(connectivity);
+            subscribers = true;
+        }
+
+        // Update Widget and Notification only if WiFi, Mobile or Disconnect event
+        if (event == Event.AIRPLANE_ON || event == Event.WIFI_OFF || event == Event.MOBILE_OFF) {
+            ConnectivityEvent disconnectedEvent = ConnectivityUtil.getConnectivityEvent(context);
+            if (disconnectedEvent.event == Event.DISCONNECT) {
+                connectivityEvent = disconnectedEvent;
+                event = connectivityEvent.event;
+            }
+        }
+
+        if (event == Event.DISCONNECT || event == Event.MOBILE || event == Event.WIFI || event == Event.WIFI_MOBILE) {
+            WidgetManager.update(context, connectivityEvent);
+            if (!subscribers) {
+                NotificationManager.show(context, connectivityEvent);
+            }
+        }
     }
 
 }

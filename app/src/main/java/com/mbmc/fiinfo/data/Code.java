@@ -5,6 +5,7 @@ import com.mbmc.fiinfo.R;
 
 public enum Code {
 
+    NONE(0, 0),
     AUTO(342886, R.string.carrier_auto),
     INFO(344636, 0),
     NEXT(346398, R.string.carrier_next),
@@ -19,6 +20,10 @@ public enum Code {
     Code(int code, int labelId) {
         this.code = code;
         this.labelId = labelId;
+    }
+
+    public static Code get(String name) {
+        return valueOf(name);
     }
 
 }

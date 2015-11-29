@@ -18,17 +18,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
     // Project
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.0.1'
 
     // Android
-    compile 'com.android.support:recyclerview-v7:23.0.1'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:recyclerview-v7:23.1.1'
 
     // 3rd party
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'com.jakewharton:butterknife:7.0.1' // View binding
+    compile 'de.greenrobot:eventbus:2.4.0' // Event bus
+    compile 'org.parceler:parceler:1.0.4' // Parcelable
 }

@@ -51,7 +51,7 @@ public class EventProvider extends ContentProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        SQLiteDatabase sqLiteDatabase = database.getWritableDatabase();
+        SQLiteDatabase sqLiteDatabase = database.getReadableDatabase();
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(Database.TABLE_EVENT);
 

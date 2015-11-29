@@ -50,11 +50,16 @@
 
     <string name="icons_legend">Icons legend</string>
 
-    <string name="menu_enable_notifications">Enable notifications</string>
-    <string name="menu_disable_notifications">Disable notifications</string>
-    <string name="menu_info">Sim info</string>
-    <string name="menu_icons">Icons</string>
     <string name="menu_carrier">Switch carrier</string>
+    <string name="menu_icons">Icons</string>
+    <string name="menu_info">Sim info</string>
+    <string name="menu_notification">Notification settings</string>
+    <string name="menu_widget">Widget settings</string>
+
+    <string name="notification_enable">Enable notifications</string>
+    <string name="notification_settings">Notification settings</string>
+    <string name="notification_sound">Sound</string>
+    <string name="notification_vibration">Vibration</string>
 
     <string name="stat_count">Count</string>
     <string name="stat_info">Info</string>
@@ -64,5 +69,7 @@
     <string name="state_connected">Currently connected to: %1$s [%2$s]</string>
     <string name="state_disconnected">Currently not connected</string>
     <string name="state_mobile">Mobile network: %1$s [%2$s]</string>
+
+    <string name="widget_settings">Widget settings</string>
 
 </resources>

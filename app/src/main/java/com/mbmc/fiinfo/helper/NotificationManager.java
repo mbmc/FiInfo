@@ -7,11 +7,10 @@ import android.content.Intent;
 import android.support.v7.app.NotificationCompat;
 
 import com.mbmc.fiinfo.R;
-import com.mbmc.fiinfo.constant.Constants;
+import com.mbmc.fiinfo.constant.Preferences;
 import com.mbmc.fiinfo.data.ConnectivityEvent;
 import com.mbmc.fiinfo.data.Event;
 import com.mbmc.fiinfo.ui.activity.MainActivity;
-import com.mbmc.fiinfo.util.ConnectivityUtil;
 import com.mbmc.fiinfo.util.StringUtil;
 
 
@@ -20,19 +19,29 @@ public class NotificationManager {
     private static final int ID = 0;
 
 
-    public static void showNotification(Context context, ConnectivityEvent connectivityEvent) {
-        if (!PreferencesManager.getInstance(context).getBoolean(Constants.NOTIFICATIONS)) {
+    public static void show(Context context, ConnectivityEvent connectivityEvent) {
+        // Notifications disabled, nothing to do
+        if (!PreferencesManager.getInstance(context).getBoolean(Preferences.NOTIFICATION_ENABLE)) {
             return;
         }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder.setSmallIcon(connectivityEvent.event.iconId);
-        builder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_LIGHTS);
+        int defaults = 0;
+        if (PreferencesManager.getInstance(context).getBoolean(Preferences.NOTIFICATION_SOUND)) {
+            defaults |= Notification.DEFAULT_SOUND;
+        }
+        if (PreferencesManager.getInstance(context).getBoolean(Preferences.NOTIFICATION_VIBRATE)) {
+            defaults |= Notification.DEFAULT_VIBRATE;
+        }
+        builder.setDefaults(defaults);
         builder.setAutoCancel(true);
         builder.setContentTitle(context.getString(R.string.app_name));
 
         String string = StringUtil.getConnectionName(context, connectivityEvent);
-        if (connectivityEvent.event == Event.MOBILE) {
+        if (connectivityEvent.event == Event.DISCONNECT) {
+            builder.setSmallIcon(Event.DISCONNECT.iconId);
+        } else if (connectivityEvent.event == Event.MOBILE) {
             builder.setSmallIcon(Event.getMobileIcon(connectivityEvent.name));
         } else if (connectivityEvent.event == Event.WIFI_MOBILE) {
             string += "\n" + context.getString(R.string.state_mobile, connectivityEvent.mobile,
@@ -54,6 +63,10 @@ public class NotificationManager {
         android.app.NotificationManager notificationManager =
                 (android.app.NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(ID, builder.build());
+    }
+
+    public static void cancel(Context context) {
+        ((android.app.NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE)).cancel(ID);
     }
 
 }

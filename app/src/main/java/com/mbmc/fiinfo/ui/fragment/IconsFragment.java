@@ -1,10 +1,9 @@
 package com.mbmc.fiinfo.ui.fragment;
 
-import android.app.DialogFragment;
+import android.app.Dialog;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.mbmc.fiinfo.R;
@@ -14,10 +13,13 @@ import com.mbmc.fiinfo.ui.component.IconLayout;
 import java.util.Arrays;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 public class IconsFragment extends DialogFragment {
 
-    private static final List<Event> events = Arrays.asList(
+    private static final List<Event> EVENTS = Arrays.asList(
             Event.AIRPLANE_OFF, Event.AIRPLANE_ON,
             Event.SHUTDOWN, Event.BOOT,
             Event.MOBILE_OFF, Event.MOBILE, Event.MOBILE, Event.MOBILE,
@@ -29,14 +31,16 @@ public class IconsFragment extends DialogFragment {
     private static final int WIFI_SPRINT = 12;
     private static final int WIFI_T_MOBILE = 13;
 
+    @Bind(R.id.icons_container) LinearLayout container;
+
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        getDialog().setTitle(R.string.icons_legend);
-        View view = inflater.inflate(R.layout.fragment_icons, container, false);
-        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.icons_container);
-        for (int i = 0; i < events.size(); ++i) {
-            IconLayout iconLayout = (IconLayout) inflater.inflate(R.layout.layout_icon, linearLayout, false);
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        View view = View.inflate(getActivity(), R.layout.fragment_icons, null);
+        ButterKnife.bind(this, view);
+
+        for (int i = 0; i < EVENTS.size(); ++i) {
+            IconLayout iconLayout = (IconLayout) View.inflate(getActivity(), R.layout.layout_icon, null);
             switch (i) {
                 case SPRINT:
                     iconLayout.setContent(R.drawable.ic_sprint, R.string.event_mobile_sprint);
@@ -50,11 +54,21 @@ public class IconsFragment extends DialogFragment {
                 case WIFI_T_MOBILE:
                     iconLayout.setContent(R.drawable.ic_wifi_t_mobile, R.string.event_wifi_t_mobile);
                     break;
-                default: iconLayout.setContent(events.get(i)); break;
+                default: iconLayout.setContent(EVENTS.get(i)); break;
             }
-            linearLayout.addView(iconLayout);
+            container.addView(iconLayout);
         }
-        return view;
+
+        return new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme)
+                .setView(view)
+                .setTitle(R.string.icons_legend)
+                .create();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
 }

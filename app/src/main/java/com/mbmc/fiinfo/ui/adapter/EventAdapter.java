@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mbmc.fiinfo.R;
-import com.mbmc.fiinfo.constant.Constants;
 import com.mbmc.fiinfo.data.Event;
+import com.mbmc.fiinfo.data.EventInfo;
 import com.mbmc.fiinfo.helper.Database;
 import com.mbmc.fiinfo.util.DateUtil;
 
@@ -33,26 +33,9 @@ public class EventAdapter extends BaseCursorAdapter {
                 cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_TIME_ZONE))));
 
         Event event = Event.get(cursor.getInt(cursor.getColumnIndexOrThrow(Database.COLUMN_TYPE)));
-        int iconId = event.iconId;
-        String info = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_NAME));
-        switch (event) {
-            case MOBILE:
-                iconId = Event.getMobileIcon(cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_NAME)));
-                info = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED));
-                break;
-
-            case WIFI_MOBILE:
-                String mobile = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_MOBILE));
-                iconId = Event.getWifiMobileIcon(mobile);
-                if (mobile.contains(Constants.SPRINT ) || mobile.contains(Constants.T_MOBILE)) {
-                    info = info + " / " + cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED));
-                } else {
-                    info = info + " / " + mobile + " [" + cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED)) + "]";
-                }
-                break;
-        }
-        viewHolder.type.setImageResource(iconId);
-        viewHolder.info.setText(info);
+        EventInfo eventInfo = EventInfo.get(event, cursor);
+        viewHolder.type.setImageResource(eventInfo.iconId);
+        viewHolder.info.setText(eventInfo.info);
     }
 
 

@@ -49,7 +49,7 @@ import de.greenrobot.event.EventBus;
 
 public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<Cursor>, RefreshListener {
-    
+
     private static final int URL_LOADER = 0;
     private static final String[] projection = {
             Database.COLUMN_ID,

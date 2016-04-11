@@ -4,7 +4,7 @@ package com.mbmc.fiinfo.constant;
 public class Preferences {
 
     public static final String HIDE_CODE_INSTRUCTIONS = "code_instructions";
-    
+
     public static final String NOTIFICATION_ENABLE = "notification_enable";
     public static final String NOTIFICATION_SOUND = "notification_sound";
     public static final String NOTIFICATION_VIBRATE = "notification_vibrate";

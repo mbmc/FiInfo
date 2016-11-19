@@ -14,7 +14,9 @@ public enum Filter {
     SPRINT(R.string.carrier_sprint, "name LIKE '%Sprint%'"
             + " OR mobile LIKE '%Sprint%'"),
     T_MOBILE(R.string.carrier_t_mobile, "name LIKE '%T-Mobile%'"
-            + " OR mobile LIKE '%T-Mobile%'");
+            + " OR mobile LIKE '%T-Mobile%'"),
+    US_CELLULAR(R.string.carrier_us_cellular, "name LIKE '%US Cellular%'"
+            + " OR mobile LIKE '%US Cellular%'");
 
     public int stringId;
     public String selection;

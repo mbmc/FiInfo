@@ -12,6 +12,7 @@
     <string name="carrier_repair">Repair</string>
     <string name="carrier_sprint">Sprint</string>
     <string name="carrier_t_mobile">T-Mobile</string>
+    <string name="carrier_us_cellular">US Cellular</string>
 
     <string name="clear">Clear all events?</string>
 
@@ -28,6 +29,7 @@
     <string name="event_mobile_off">Cell off</string>
     <string name="event_mobile_sprint">Connected to Sprint</string>
     <string name="event_mobile_t_mobile">Connected to T-Mobile</string>
+    <string name="event_mobile_us_cellular">Connected to US Cellular</string>
     <string name="event_shutdown">Phone off</string>
     <string name="event_unknown">Unknown</string>
     <string name="event_wifi">Connected to WiFi</string>
@@ -36,6 +38,7 @@
     <string name="event_wifi_mobile">Connected to WiFi and a carrier</string>
     <string name="event_wifi_sprint">Connected to WiFi and Sprint</string>
     <string name="event_wifi_t_mobile">Connected to WiFi and T-Mobile</string>
+    <string name="event_wifi_us_cellular">Connected to WiFi and US Cellular</string>
 
     <string name="event_count">(%1$s records)</string>
 

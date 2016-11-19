@@ -40,6 +40,8 @@ public enum Event {
             return R.drawable.ic_sprint;
         } else if (string.contains(Constants.T_MOBILE)) {
             return R.drawable.ic_t_mobile;
+        } else if (string.contains(Constants.US_CELLULAR)) {
+            return R.drawable.ic_us_cellular;
         }
         return R.drawable.ic_mobile;
     }
@@ -49,6 +51,8 @@ public enum Event {
             return R.drawable.ic_wifi_sprint;
         } else if (string.contains(Constants.T_MOBILE)) {
             return R.drawable.ic_wifi_t_mobile;
+        } else if (string.contains(Constants.US_CELLULAR)) {
+            return R.drawable.ic_wifi_us_cellular;
         }
         return R.drawable.ic_wifi_mobile;
     }

@@ -22,14 +22,17 @@ public class IconsFragment extends DialogFragment {
     private static final List<Event> EVENTS = Arrays.asList(
             Event.AIRPLANE_OFF, Event.AIRPLANE_ON,
             Event.SHUTDOWN, Event.BOOT,
-            Event.MOBILE_OFF, Event.MOBILE, Event.MOBILE, Event.MOBILE,
-            Event.WIFI_OFF, Event.WIFI_ON, Event.WIFI, Event.WIFI_MOBILE, Event.WIFI_MOBILE, Event.WIFI_MOBILE
+            Event.MOBILE_OFF, Event.MOBILE, Event.MOBILE, Event.MOBILE, Event.MOBILE,
+            Event.WIFI_OFF, Event.WIFI_ON, Event.WIFI, Event.WIFI_MOBILE, Event.WIFI_MOBILE,
+            Event.WIFI_MOBILE, Event.WIFI_MOBILE
     );
 
     private static final int SPRINT = 6;
     private static final int T_MOBILE = 7;
-    private static final int WIFI_SPRINT = 12;
-    private static final int WIFI_T_MOBILE = 13;
+    private static final int US_CELLULAR = 8;
+    private static final int WIFI_SPRINT = 13;
+    private static final int WIFI_T_MOBILE = 14;
+    private static final int WIFI_US_CELLULAR = 15;
 
     @Bind(R.id.icons_container) LinearLayout container;
 
@@ -48,11 +51,17 @@ public class IconsFragment extends DialogFragment {
                 case T_MOBILE:
                     iconLayout.setContent(R.drawable.ic_t_mobile, R.string.event_mobile_t_mobile);
                     break;
+                case US_CELLULAR:
+                    iconLayout.setContent(R.drawable.ic_us_cellular, R.string.event_mobile_us_cellular);
+                    break;
                 case WIFI_SPRINT:
                     iconLayout.setContent(R.drawable.ic_wifi_sprint, R.string.event_wifi_sprint);
                     break;
                 case WIFI_T_MOBILE:
                     iconLayout.setContent(R.drawable.ic_wifi_t_mobile, R.string.event_wifi_t_mobile);
+                    break;
+                case WIFI_US_CELLULAR:
+                    iconLayout.setContent(R.drawable.ic_wifi_us_cellular, R.string.event_wifi_us_cellular);
                     break;
                 default: iconLayout.setContent(EVENTS.get(i)); break;
             }

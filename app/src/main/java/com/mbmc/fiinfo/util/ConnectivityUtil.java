@@ -159,6 +159,8 @@ public class ConnectivityUtil {
             return context.getString(R.string.carrier_sprint);
         } else if (MobileCarrier.T_MOBILE.contains(sim)) {
             return context.getString(R.string.carrier_t_mobile);
+        } else if (MobileCarrier.US_CELLULAR.contains(sim)) {
+            return context.getString(R.string.carrier_us_cellular);
         }
         return telephonyManager.getSimOperatorName();
     }

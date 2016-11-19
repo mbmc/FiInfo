@@ -24,7 +24,8 @@ import butterknife.ButterKnife;
 
 public class WidgetSettingsFragment extends DialogFragment {
 
-    private static final List<Code> CODES = Arrays.asList(Code.AUTO, Code.REPAIR, Code.NEXT, Code.SPRINT, Code.T_MOBILE);
+    private static final List<Code> CODES = Arrays.asList(Code.AUTO, Code.REPAIR, Code.NEXT,
+            Code.SPRINT, Code.T_MOBILE, Code.US_CELLULAR);
     private static final int SIZE = CODES.size();
     private static final String[] CHOICES = new String[SIZE];
 

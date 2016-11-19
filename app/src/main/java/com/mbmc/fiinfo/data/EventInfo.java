@@ -27,7 +27,8 @@ public class EventInfo {
             case WIFI_MOBILE:
                 String mobile = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_MOBILE));
                 iconId = Event.getWifiMobileIcon(mobile);
-                if (mobile.contains(Constants.SPRINT ) || mobile.contains(Constants.T_MOBILE)) {
+                if (mobile.contains(Constants.SPRINT) || mobile.contains(Constants.T_MOBILE)
+                        || mobile.contains(Constants.US_CELLULAR)) {
                     info = info + " / " + cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED));
                 } else {
                     info = info + " / " + mobile + " [" + cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED)) + "]";

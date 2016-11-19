@@ -11,7 +11,8 @@ public enum Code {
     NEXT(346398, R.string.carrier_next),
     REPAIR(34963, R.string.carrier_repair),
     SPRINT(34777, R.string.carrier_sprint),
-    T_MOBILE(34866, R.string.carrier_t_mobile);
+    T_MOBILE(34866, R.string.carrier_t_mobile),
+    US_CELLULAR(34326, R.string.carrier_us_cellular);
 
     public int code;
     public int labelId;

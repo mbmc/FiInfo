@@ -1,7 +1,7 @@
-# Fi Info
+# Signal Info (formerly Fi Info)
 Having a Project Fi Sim card?
 
-&#8226; Fi Info allows you to see and keep track of which network you're connected to (WiFi, Sprint, T-Mobile), and at which speed (2G, 3G, 4G).
+&#8226; Signal Info allows you to see and keep track of which network you're connected to (WiFi, Sprint, T-Mobile), and at which speed (2G, 3G, 4G).
 
 &#8226; Events recorded:
 - airplane mode on/off

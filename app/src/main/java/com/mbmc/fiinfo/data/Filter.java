@@ -15,6 +15,8 @@ public enum Filter {
             + " OR mobile LIKE '%Sprint%'"),
     T_MOBILE(R.string.carrier_t_mobile, "name LIKE '%T-Mobile%'"
             + " OR mobile LIKE '%T-Mobile%'"),
+    THREE_UK(R.string.carrier_three_uk, "name LIKE '%Three UK%'"
+            + " OR mobile LIKE '%Three UK%'"),
     US_CELLULAR(R.string.carrier_us_cellular, "name LIKE '%US Cellular%'"
             + " OR mobile LIKE '%US Cellular%'");
 

@@ -5,13 +5,18 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 
-public class DateUtil {
+public final class DateUtil {
 
     public static String getDate(long ms, String timeZone) {
-        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM,
+        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT,
                 DateFormat.MEDIUM, Locale.getDefault());
         dateFormat.setTimeZone(TimeZone.getTimeZone(timeZone));
         return dateFormat.format(ms);
+    }
+
+
+    private DateUtil() {
+
     }
 
 }

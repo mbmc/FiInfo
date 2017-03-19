@@ -25,22 +25,14 @@ public class CodeInstructionsFragment extends DialogFragment {
 
         return new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme)
                 .setView(view)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int id) {
-                        if (checkBox.isChecked()) {
-                            PreferencesManager.getInstance(getActivity())
-                                    .setBoolean(Preferences.HIDE_CODE_INSTRUCTIONS, true);
-                        }
-                        CodeManager.openDialer(getActivity(), code);
+                .setPositiveButton(R.string.ok, (DialogInterface dialogInterface, int which) -> {
+                    if (checkBox.isChecked()) {
+                        PreferencesManager.getInstance(getActivity())
+                                .setBoolean(Preferences.HIDE_CODE_INSTRUCTIONS, true);
                     }
+                    CodeManager.openDialer(getActivity(), code);
                 })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int id) {
-                        dialogInterface.dismiss();
-                    }
-                })
+                .setNegativeButton(R.string.cancel, (DialogInterface dialogInterface, int which) -> dialogInterface.dismiss())
                 .create();
     }
 

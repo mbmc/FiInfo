@@ -1,8 +1,8 @@
 package com.mbmc.fiinfo.data;
 
+import android.content.Context;
 import android.database.Cursor;
 
-import com.mbmc.fiinfo.constant.Constants;
 import com.mbmc.fiinfo.helper.Database;
 
 
@@ -12,7 +12,7 @@ public class EventInfo {
     public String info;
 
 
-    public static EventInfo get(Event event, Cursor cursor) {
+    public static EventInfo get(Context context, Event event, Cursor cursor) {
         EventInfo eventInfo = new EventInfo();
 
         int iconId = event.iconId;
@@ -20,19 +20,14 @@ public class EventInfo {
 
         switch (event) {
             case MOBILE:
-                iconId = Event.getMobileIcon(info);
+                iconId = MobileEvent.getIcon(context, info);
                 info = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED));
                 break;
 
             case WIFI_MOBILE:
                 String mobile = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_MOBILE));
-                iconId = Event.getWifiMobileIcon(mobile);
-                if (mobile.contains(Constants.SPRINT) || mobile.contains(Constants.T_MOBILE)
-                        || mobile.contains(Constants.US_CELLULAR)) {
-                    info = info + " / " + cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED));
-                } else {
-                    info = info + " / " + mobile + " [" + cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED)) + "]";
-                }
+                iconId = WiFiMobileEvent.getIcon(context, mobile);
+                info = WiFiMobileEvent.getInfo(context, mobile, info, cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED)));
                 break;
         }
         eventInfo.iconId = iconId;

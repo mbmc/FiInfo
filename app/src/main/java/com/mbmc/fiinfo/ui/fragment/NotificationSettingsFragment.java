@@ -10,22 +10,25 @@ import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.constant.Preferences;
 import com.mbmc.fiinfo.helper.PreferencesManager;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
+import butterknife.Unbinder;
 
 
 public class NotificationSettingsFragment extends DialogFragment {
 
-    @Bind(R.id.notification_settings_enable) Switch enable;
-    @Bind(R.id.notification_settings_sound) Switch sound;
-    @Bind(R.id.notification_settings_vibration) Switch vibration;
+    @BindView(R.id.notification_settings_enable) Switch enable;
+    @BindView(R.id.notification_settings_sound) Switch sound;
+    @BindView(R.id.notification_settings_vibration) Switch vibration;
+
+    private Unbinder unbinder;
 
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = View.inflate(getActivity(), R.layout.fragment_notification_settings, null);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
 
         enable.setChecked(PreferencesManager.getInstance(getActivity()).getBoolean(Preferences.NOTIFICATION_ENABLE));
         sound.setChecked(PreferencesManager.getInstance(getActivity()).getBoolean(Preferences.NOTIFICATION_SOUND));
@@ -41,7 +44,7 @@ public class NotificationSettingsFragment extends DialogFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
     @OnCheckedChanged(R.id.notification_settings_enable)

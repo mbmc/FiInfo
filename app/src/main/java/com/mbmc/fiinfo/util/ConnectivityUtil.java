@@ -13,7 +13,7 @@ import com.mbmc.fiinfo.data.Event;
 import com.mbmc.fiinfo.data.MobileCarrier;
 
 
-public class ConnectivityUtil {
+public final class ConnectivityUtil {
 
     private static String UNKNOWN = "Unknown";
 
@@ -154,15 +154,7 @@ public class ConnectivityUtil {
             return UNKNOWN;
         }
 
-        String sim = telephonyManager.getSimOperator();
-        if (MobileCarrier.SPRINT.contains(sim)) {
-            return context.getString(R.string.carrier_sprint);
-        } else if (MobileCarrier.T_MOBILE.contains(sim)) {
-            return context.getString(R.string.carrier_t_mobile);
-        } else if (MobileCarrier.US_CELLULAR.contains(sim)) {
-            return context.getString(R.string.carrier_us_cellular);
-        }
-        return telephonyManager.getSimOperatorName();
+        return MobileCarrier.getName(context, telephonyManager.getSimOperator(), telephonyManager.getSimOperatorName());
     }
 
     public static boolean isConnectedToWifi(Context context) {
@@ -184,6 +176,11 @@ public class ConnectivityUtil {
         }
 
         return getSpeed(telephonyManager.getNetworkType());
+    }
+
+
+    private ConnectivityUtil() {
+
     }
 
 }

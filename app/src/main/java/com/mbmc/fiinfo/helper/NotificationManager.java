@@ -10,6 +10,8 @@ import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.constant.Preferences;
 import com.mbmc.fiinfo.data.ConnectivityEvent;
 import com.mbmc.fiinfo.data.Event;
+import com.mbmc.fiinfo.data.MobileEvent;
+import com.mbmc.fiinfo.data.WiFiMobileEvent;
 import com.mbmc.fiinfo.ui.activity.MainActivity;
 import com.mbmc.fiinfo.util.StringUtil;
 
@@ -42,12 +44,12 @@ public class NotificationManager {
         if (connectivityEvent.event == Event.DISCONNECT) {
             builder.setSmallIcon(Event.DISCONNECT.iconId);
         } else if (connectivityEvent.event == Event.MOBILE) {
-            builder.setSmallIcon(Event.getMobileIcon(connectivityEvent.name));
+            builder.setSmallIcon(MobileEvent.getIcon(context, connectivityEvent.name));
         } else if (connectivityEvent.event == Event.WIFI_MOBILE) {
             string += "\n" + context.getString(R.string.state_mobile, connectivityEvent.mobile,
                     connectivityEvent.speed);
             builder.setStyle(new NotificationCompat.BigTextStyle().bigText(string));
-            builder.setSmallIcon(Event.getWifiMobileIcon(connectivityEvent.mobile));
+            builder.setSmallIcon(WiFiMobileEvent.getIcon(context, connectivityEvent.mobile));
         }
         builder.setContentText(string);
 

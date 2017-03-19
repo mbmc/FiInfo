@@ -15,18 +15,10 @@ public class ClearEventsFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme)
                 .setTitle(R.string.clear)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        getActivity().getContentResolver().delete(EventProvider.URI, null, null);
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                })
+                .setPositiveButton(R.string.ok, (DialogInterface dialogInterface, int which)
+                        -> getActivity().getContentResolver().delete(EventProvider.URI, null, null))
+                .setNegativeButton(R.string.cancel, (DialogInterface dialogInterface, int which)
+                        -> dialogInterface.dismiss())
                 .create();
     }
 

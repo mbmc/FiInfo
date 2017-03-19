@@ -1,5 +1,6 @@
 package com.mbmc.fiinfo.ui.activity;
 
+import android.Manifest;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mbmc.fiinfo.data.Code;
 import com.mbmc.fiinfo.data.ConnectivityEvent;
@@ -25,6 +27,7 @@ import com.mbmc.fiinfo.helper.NotificationManager;
 import com.mbmc.fiinfo.provider.EventProvider;
 import com.mbmc.fiinfo.ui.adapter.EventAdapter;
 import com.mbmc.fiinfo.ui.component.RefreshLayout;
+import com.mbmc.fiinfo.ui.fragment.AboutFragment;
 import com.mbmc.fiinfo.ui.fragment.ClearEventsFragment;
 import com.mbmc.fiinfo.ui.fragment.CodeInstructionsFragment;
 import com.mbmc.fiinfo.ui.fragment.FiltersFragment;
@@ -36,8 +39,9 @@ import com.mbmc.fiinfo.ui.fragment.WidgetSettingsFragment;
 import com.mbmc.fiinfo.util.ConnectivityUtil;
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.util.StringUtil;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
@@ -58,17 +62,20 @@ public class MainActivity extends AppCompatActivity
             Database.COLUMN_SPEED
     };
 
-    @Bind(R.id.main_refresh) RefreshLayout refreshLayout;
-    @Bind(R.id.recycler_view) RecyclerView recyclerView;
-    @Bind(R.id.main_state) TextView state;
-    @Bind(R.id.main_state_mobile) TextView mobile;
-    @Bind(R.id.main_count) TextView count;
-    @Bind(R.id.main_filter) TextView filter;
-    @Bind(R.id.main_current_filter) TextView currentFilter;
-    @Bind(R.id.main_stats) TextView stats;
-    @Bind(R.id.main_clear) TextView clear;
-    @Bind(R.id.main_progress) View progress;
+    @BindView(R.id.main_refresh) RefreshLayout refreshLayout;
+    @BindView(R.id.recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.main_state) TextView state;
+    @BindView(R.id.main_state_mobile) TextView mobile;
+    @BindView(R.id.main_count) TextView count;
+    @BindView(R.id.main_filter) TextView filter;
+    @BindView(R.id.main_current_filter) TextView currentFilter;
+    @BindView(R.id.main_stats) TextView stats;
+    @BindView(R.id.main_clear) TextView clear;
+    @BindView(R.id.main_progress) View progress;
 
+    private RxPermissions rxPermissions;
+
+    private AboutFragment aboutFragment;
     private ClearEventsFragment clearEventsFragment;
     private CodeInstructionsFragment codeInstructionsFragment;
     private FiltersFragment filtersFragment;
@@ -89,7 +96,15 @@ public class MainActivity extends AppCompatActivity
 
         ButterKnife.bind(this);
 
+        rxPermissions = new RxPermissions(this);
+
         setupUi();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        checkPermissions();
     }
 
     @Override
@@ -127,12 +142,20 @@ public class MainActivity extends AppCompatActivity
                 CodeManager.send(this, Code.INFO.code);
                 return true;
 
+            case R.id.main_action_qr:
+                CodeManager.send(this, Code.QR.code);
+                return true;
+
             case R.id.main_action_carrier:
                 switchCarrierFragment.show(getFragmentManager(), "codes");
                 return true;
 
             case R.id.main_action_icons:
                 iconsFragment.show(getFragmentManager(), "icons");
+                return true;
+
+            case R.id.main_action_about:
+                aboutFragment.show(getFragmentManager(), "about");
                 return true;
 
             default:
@@ -215,6 +238,7 @@ public class MainActivity extends AppCompatActivity
         filter.setTypeface(font);
         clear.setTypeface(font);
 
+        aboutFragment = new AboutFragment();
         clearEventsFragment = new ClearEventsFragment();
         codeInstructionsFragment = new CodeInstructionsFragment();
         filtersFragment = new FiltersFragment();
@@ -242,6 +266,17 @@ public class MainActivity extends AppCompatActivity
 
     private void setCurrentFilter(int resId) {
         currentFilter.setText(getString(R.string.filter_current, getString(resId)));
+    }
+
+    private void checkPermissions() {
+        rxPermissions.request(Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.ACCESS_WIFI_STATE,
+                Manifest.permission.READ_PHONE_STATE)
+                .subscribe(granted -> {
+                    if (!granted) {
+                        Toast.makeText(this, R.string.error_permissions, Toast.LENGTH_LONG).show();
+                    }
+        });
     }
 
 }

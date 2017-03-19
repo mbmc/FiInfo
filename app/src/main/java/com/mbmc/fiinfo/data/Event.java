@@ -1,7 +1,6 @@
 package com.mbmc.fiinfo.data;
 
 import com.mbmc.fiinfo.R;
-import com.mbmc.fiinfo.constant.Constants;
 
 
 public enum Event {
@@ -33,28 +32,6 @@ public enum Event {
         } catch (Exception exception) {
             return NONE;
         }
-    }
-
-    public static int getMobileIcon(String string) {
-        if (string.contains(Constants.SPRINT)) {
-            return R.drawable.ic_sprint;
-        } else if (string.contains(Constants.T_MOBILE)) {
-            return R.drawable.ic_t_mobile;
-        } else if (string.contains(Constants.US_CELLULAR)) {
-            return R.drawable.ic_us_cellular;
-        }
-        return R.drawable.ic_mobile;
-    }
-
-    public static int getWifiMobileIcon(String string) {
-        if (string.contains(Constants.SPRINT)) {
-            return R.drawable.ic_wifi_sprint;
-        } else if (string.contains(Constants.T_MOBILE)) {
-            return R.drawable.ic_wifi_t_mobile;
-        } else if (string.contains(Constants.US_CELLULAR)) {
-            return R.drawable.ic_wifi_us_cellular;
-        }
-        return R.drawable.ic_wifi_mobile;
     }
 
 }

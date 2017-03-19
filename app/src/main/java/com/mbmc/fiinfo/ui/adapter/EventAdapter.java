@@ -33,7 +33,7 @@ public class EventAdapter extends BaseCursorAdapter {
                 cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_TIME_ZONE))));
 
         Event event = Event.get(cursor.getInt(cursor.getColumnIndexOrThrow(Database.COLUMN_TYPE)));
-        EventInfo eventInfo = EventInfo.get(event, cursor);
+        EventInfo eventInfo = EventInfo.get(viewHolder.itemView.getContext(), event, cursor);
         viewHolder.type.setImageResource(eventInfo.iconId);
         viewHolder.info.setText(eventInfo.info);
     }

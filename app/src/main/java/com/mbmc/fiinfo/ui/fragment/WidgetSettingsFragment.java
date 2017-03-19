@@ -18,26 +18,29 @@ import com.mbmc.fiinfo.helper.WidgetManager;
 import java.util.Arrays;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 public class WidgetSettingsFragment extends DialogFragment {
 
     private static final List<Code> CODES = Arrays.asList(Code.AUTO, Code.REPAIR, Code.NEXT,
-            Code.SPRINT, Code.T_MOBILE, Code.US_CELLULAR);
+            Code.SPRINT, Code.T_MOBILE, Code.THREE_UK, Code.US_CELLULAR);
     private static final int SIZE = CODES.size();
     private static final String[] CHOICES = new String[SIZE];
 
-    @Bind(R.id.widget_settings_1) Spinner spinner1;
-    @Bind(R.id.widget_settings_2) Spinner spinner2;
-    @Bind(R.id.widget_settings_3) Spinner spinner3;
+    @BindView(R.id.widget_settings_1) Spinner spinner1;
+    @BindView(R.id.widget_settings_2) Spinner spinner2;
+    @BindView(R.id.widget_settings_3) Spinner spinner3;
+
+    private Unbinder unbinder;
 
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = View.inflate(getActivity(), R.layout.fragment_widget_settings, null);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
 
         for (int i = 0; i < SIZE; ++i) {
             CHOICES[i] = getString(CODES.get(i).labelId);
@@ -50,27 +53,19 @@ public class WidgetSettingsFragment extends DialogFragment {
         return new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme)
                 .setView(view)
                 .setTitle(R.string.widget_settings)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        save();
-                        WidgetManager.update(getActivity());
-                        dialogInterface.dismiss();
-                    }
+                .setPositiveButton(R.string.ok, (DialogInterface dialogInterface, int which) -> {
+                    save();
+                    WidgetManager.update(getActivity());
+                    dialogInterface.dismiss();
                 })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                })
+                .setNegativeButton(R.string.cancel, (DialogInterface dialogInterface, int which) -> dialogInterface.dismiss())
                 .create();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
 

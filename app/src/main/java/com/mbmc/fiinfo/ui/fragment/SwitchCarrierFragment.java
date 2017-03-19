@@ -16,7 +16,7 @@ import java.util.List;
 public class SwitchCarrierFragment extends DialogFragment {
 
     private static final List<Code> CODES = Arrays.asList(Code.AUTO, Code.REPAIR,
-            Code.NEXT, Code.SPRINT, Code.T_MOBILE, Code.US_CELLULAR);
+            Code.NEXT, Code.SPRINT, Code.T_MOBILE, Code.THREE_UK, Code.US_CELLULAR);
     private static final int SIZE = CODES.size();
     private static final CharSequence[] TITLES = new CharSequence[SIZE];
 
@@ -28,12 +28,8 @@ public class SwitchCarrierFragment extends DialogFragment {
         }
 
         return new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme)
-                .setItems(TITLES, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int which) {
-                        CodeManager.send(getActivity(), CODES.get(which).code);
-                    }
-                })
+                .setItems(TITLES, (DialogInterface dialogInterface, int which) ->
+                        CodeManager.send(getActivity(), CODES.get(which).code))
                 .setTitle(R.string.menu_carrier)
                 .create();
     }

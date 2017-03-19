@@ -16,8 +16,9 @@ import com.mbmc.fiinfo.ui.adapter.StatAdapter;
 import com.mbmc.fiinfo.ui.component.RecyclerView;
 import com.mbmc.fiinfo.ui.component.RefreshLayout;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 public class StatsFragment extends DialogFragment
@@ -25,17 +26,18 @@ public class StatsFragment extends DialogFragment
 
     private static final int URL_LOADER = 0;
 
-    @Bind(R.id.recycler_view) RecyclerView recyclerView;
-    @Bind(R.id.stats_refresh) RefreshLayout refreshLayout;
-    @Bind(R.id.stats_progress) View progress;
+    @BindView(R.id.recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.stats_refresh) RefreshLayout refreshLayout;
+    @BindView(R.id.stats_progress) View progress;
 
+    private Unbinder unbinder;
     private StatAdapter eventAdapter;
 
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = View.inflate(getActivity(), R.layout.fragment_stats, null);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
 
         recyclerView.setAdapter(eventAdapter = new StatAdapter());
         refreshLayout.setRefreshListener(this);
@@ -50,7 +52,7 @@ public class StatsFragment extends DialogFragment
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
     @Override

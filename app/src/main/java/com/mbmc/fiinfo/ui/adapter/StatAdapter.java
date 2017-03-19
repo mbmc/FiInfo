@@ -30,7 +30,7 @@ public class StatAdapter extends BaseCursorAdapter {
         viewHolder.count.setText(cursor.getString(cursor.getColumnIndexOrThrow("count")));
 
         Event event = Event.get(cursor.getInt(cursor.getColumnIndexOrThrow(Database.COLUMN_TYPE)));
-        EventInfo eventInfo = EventInfo.get(event, cursor);
+        EventInfo eventInfo = EventInfo.get(viewHolder.itemView.getContext(), event, cursor);
         viewHolder.type.setImageResource(eventInfo.iconId);
         viewHolder.info.setText(eventInfo.info);
     }

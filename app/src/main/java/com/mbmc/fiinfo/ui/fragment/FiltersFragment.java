@@ -24,12 +24,8 @@ public class FiltersFragment extends DialogFragment {
 
         return new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme)
                 .setTitle(R.string.filter)
-                .setItems(TITLES, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int which) {
-                        ((MainActivity) getActivity()).applyFilter(Filter.values()[which]);
-                    }
-                })
+                .setItems(TITLES, (DialogInterface dialogInterface, int which) ->
+                        ((MainActivity) getActivity()).applyFilter(Filter.values()[which]))
                 .create();
     }
 

@@ -10,6 +10,8 @@ import android.widget.RemoteViews;
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.data.ConnectivityEvent;
 import com.mbmc.fiinfo.data.Event;
+import com.mbmc.fiinfo.data.MobileEvent;
+import com.mbmc.fiinfo.data.WiFiMobileEvent;
 import com.mbmc.fiinfo.widget.MiniWidgetProvider;
 import com.mbmc.fiinfo.widget.WidgetProvider;
 
@@ -59,11 +61,11 @@ public class WidgetManager {
         int iconId = connectivityEvent.event.iconId;
         switch (connectivityEvent.event) {
             case MOBILE:
-                iconId = Event.getMobileIcon(name);
+                iconId = MobileEvent.getIcon(context, name);
                 break;
 
             case WIFI_MOBILE:
-                iconId = Event.getWifiMobileIcon(connectivityEvent.mobile);
+                iconId = WiFiMobileEvent.getIcon(context, connectivityEvent.mobile);
                 break;
         }
         remoteViews.setImageViewResource(R.id.widget_icon, iconId);

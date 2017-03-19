@@ -7,11 +7,16 @@
     <string name="cancel">Cancel</string>
     <string name="wifi">WiFi</string>
 
+    <string name="about">About</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_privacy_policy">Privacy policy</string>
+
     <string name="carrier_auto">Auto</string>
     <string name="carrier_next">Next</string>
     <string name="carrier_repair">Repair</string>
     <string name="carrier_sprint">Sprint</string>
     <string name="carrier_t_mobile">T-Mobile</string>
+    <string name="carrier_three_uk">Three UK</string>
     <string name="carrier_us_cellular">US Cellular</string>
 
     <string name="clear">Clear all events?</string>
@@ -21,6 +26,8 @@
     <string name="code_instructions">Unlike regular secret codes, Project Fi\'s can\'t be executed directly. Upon selecting an option, the Dialer will show-up and you\'ll have to paste the code that was automatically copied into the clipboard.</string>
     <string name="code_instructions_hide">Don\'t show me again</string>
 
+    <string name="error_permissions">You need to grant \'Phone\' permission to receive events.</string>
+
     <string name="event_boot">Phone on</string>
     <string name="event_airplane_on">Airplane mode on</string>
     <string name="event_airplane_off">Airplane mode off</string>
@@ -29,6 +36,7 @@
     <string name="event_mobile_off">Cell off</string>
     <string name="event_mobile_sprint">Connected to Sprint</string>
     <string name="event_mobile_t_mobile">Connected to T-Mobile</string>
+    <string name="event_mobile_three_uk">Connected to Three UK</string>
     <string name="event_mobile_us_cellular">Connected to US Cellular</string>
     <string name="event_shutdown">Phone off</string>
     <string name="event_unknown">Unknown</string>
@@ -38,9 +46,10 @@
     <string name="event_wifi_mobile">Connected to WiFi and a carrier</string>
     <string name="event_wifi_sprint">Connected to WiFi and Sprint</string>
     <string name="event_wifi_t_mobile">Connected to WiFi and T-Mobile</string>
+    <string name="event_wifi_three_uk">Connected to WiFi and Three UK</string>
     <string name="event_wifi_us_cellular">Connected to WiFi and US Cellular</string>
 
-    <string name="event_count">(%1$s records)</string>
+    <string name="event_count">(%1$d records)</string>
 
     <string name="filter">Display events</string>
     <string name="filter_all">All</string>
@@ -53,10 +62,12 @@
 
     <string name="icons_legend">Icons legend</string>
 
+    <string name="menu_about">About</string>
     <string name="menu_carrier">Switch carrier</string>
     <string name="menu_icons">Icons</string>
     <string name="menu_info">Sim info</string>
     <string name="menu_notification">Notification settings</string>
+    <string name="menu_qr">QR code</string>
     <string name="menu_widget">Widget settings</string>
 
     <string name="notification_enable">Enable notifications</string>

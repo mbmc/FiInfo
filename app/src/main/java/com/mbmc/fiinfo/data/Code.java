@@ -9,10 +9,12 @@ public enum Code {
     AUTO(342886, R.string.carrier_auto),
     INFO(344636, 0),
     NEXT(346398, R.string.carrier_next),
+    QR(359948434, 0),
     REPAIR(34963, R.string.carrier_repair),
     SPRINT(34777, R.string.carrier_sprint),
     T_MOBILE(34866, R.string.carrier_t_mobile),
-    US_CELLULAR(34326, R.string.carrier_us_cellular);
+    THREE_UK(3474666, R.string.carrier_three_uk),
+    US_CELLULAR(34326, R.string.carrier_us_cellular); // 34872
 
     public int code;
     public int labelId;

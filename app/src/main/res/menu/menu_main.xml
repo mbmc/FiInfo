@@ -23,6 +23,12 @@
         />
 
     <item
+        android:id="@+id/main_action_qr"
+        android:title="@string/menu_qr"
+        app:showAsAction="never"
+        />
+
+    <item
         android:id="@+id/main_action_carrier"
         android:title="@string/menu_carrier"
         app:showAsAction="never"
@@ -31,6 +37,12 @@
     <item
         android:id="@+id/main_action_icons"
         android:title="@string/menu_icons"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/main_action_about"
+        android:title="@string/menu_about"
         app:showAsAction="never"
         />
 

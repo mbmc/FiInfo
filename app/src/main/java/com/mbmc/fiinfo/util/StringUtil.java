@@ -6,7 +6,7 @@ import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.data.ConnectivityEvent;
 
 
-public class StringUtil {
+public final class StringUtil {
 
     public static String getConnectionName(Context context, ConnectivityEvent connectivityEvent) {
         String string = "";
@@ -27,6 +27,11 @@ public class StringUtil {
                 break;
         }
         return string;
+    }
+
+
+    private StringUtil() {
+
     }
 
 }

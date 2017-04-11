@@ -42,8 +42,8 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     // Android
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support:recyclerview-v7:25.2.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
 
     // 3rd party
     compile 'com.jakewharton:butterknife:8.5.1' // View binding

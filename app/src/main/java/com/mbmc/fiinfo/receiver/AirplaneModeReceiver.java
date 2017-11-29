@@ -13,7 +13,9 @@ public class AirplaneModeReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         EventManager.getInstance().log(context,
-                intent.getExtras().getBoolean("state") ? Event.AIRPLANE_ON : Event.AIRPLANE_OFF);
+                intent.getExtras().getBoolean("state")
+                        ? Event.AIRPLANE_ON
+                        : Event.AIRPLANE_OFF);
     }
 
 }

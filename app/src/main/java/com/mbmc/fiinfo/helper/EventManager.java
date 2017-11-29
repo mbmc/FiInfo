@@ -41,13 +41,16 @@ public class EventManager {
     public synchronized void log(Context context, ConnectivityEvent connectivityEvent) {
         if (previousType == null) {
             previousType = Event.NONE.ordinal();
-            Cursor cursor = context.getContentResolver().query(EventProvider.URI_LAST, null, null, null, null);
+            Cursor cursor = context.getContentResolver().query(EventProvider.URI_LAST,
+                    null, null, null, null);
             if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToPosition(0);
                 previousType = cursor.getInt(cursor.getColumnIndexOrThrow(Database.COLUMN_TYPE));
                 previousName = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_NAME));
-                previousMobile = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_MOBILE));
-                previousSpeed = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED));
+                previousMobile =
+                        cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_MOBILE));
+                previousSpeed =
+                        cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED));
             }
             if (cursor != null) {
                 cursor.close();
@@ -109,7 +112,8 @@ public class EventManager {
             }
         }
 
-        if (event == Event.DISCONNECT || event == Event.MOBILE || event == Event.WIFI || event == Event.WIFI_MOBILE) {
+        if (event == Event.DISCONNECT || event == Event.MOBILE || event == Event.WIFI
+                || event == Event.WIFI_MOBILE) {
             WidgetManager.update(context, connectivityEvent);
             if (!subscribers) {
                 NotificationManager.show(context, connectivityEvent);

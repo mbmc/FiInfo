@@ -42,9 +42,9 @@ public class StatAdapter extends BaseCursorAdapter {
 
         public StatViewHolder(View itemView) {
             super(itemView);
-            count = (TextView) itemView.findViewById(R.id.stat_count);
-            type = (ImageView) itemView.findViewById(R.id.stat_type);
-            info = (TextView) itemView.findViewById(R.id.stat_info);
+            count = itemView.findViewById(R.id.stat_count);
+            type = itemView.findViewById(R.id.stat_type);
+            info = itemView.findViewById(R.id.stat_info);
         }
     }
 

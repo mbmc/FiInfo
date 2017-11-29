@@ -18,12 +18,7 @@ public class RefreshLayout extends SwipeRefreshLayout
     public RefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshListener.onRefresh();
-            }
-        });
+        setOnRefreshListener(() -> refreshListener.onRefresh());
     }
 
     @Override

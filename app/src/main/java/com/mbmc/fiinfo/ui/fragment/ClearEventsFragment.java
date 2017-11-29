@@ -16,7 +16,8 @@ public class ClearEventsFragment extends DialogFragment {
         return new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme)
                 .setTitle(R.string.clear)
                 .setPositiveButton(R.string.ok, (DialogInterface dialogInterface, int which)
-                        -> getActivity().getContentResolver().delete(EventProvider.URI, null, null))
+                        -> getActivity().getContentResolver().delete(EventProvider.URI,
+                        null, null))
                 .setNegativeButton(R.string.cancel, (DialogInterface dialogInterface, int which)
                         -> dialogInterface.dismiss())
                 .create();

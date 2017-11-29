@@ -28,6 +28,7 @@ import com.mbmc.fiinfo.provider.EventProvider;
 import com.mbmc.fiinfo.ui.adapter.EventAdapter;
 import com.mbmc.fiinfo.ui.component.RefreshLayout;
 import com.mbmc.fiinfo.ui.fragment.AboutFragment;
+import com.mbmc.fiinfo.ui.fragment.BackupFragment;
 import com.mbmc.fiinfo.ui.fragment.ClearEventsFragment;
 import com.mbmc.fiinfo.ui.fragment.CodeInstructionsFragment;
 import com.mbmc.fiinfo.ui.fragment.FiltersFragment;
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity
     private RxPermissions rxPermissions;
 
     private AboutFragment aboutFragment;
+    private BackupFragment backupFragment;
     private ClearEventsFragment clearEventsFragment;
     private CodeInstructionsFragment codeInstructionsFragment;
     private FiltersFragment filtersFragment;
@@ -97,6 +99,8 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
 
         rxPermissions = new RxPermissions(this);
+
+        NotificationManager.createChannel(this);
 
         setupUi();
     }
@@ -130,6 +134,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+            case R.id.main_action_backup:
+                backupFragment.show(getFragmentManager(), "backup");
+                return true;
+
             case R.id.main_action_notification:
                 notificationSettingsFragment.show(getFragmentManager(), "notification");
                 return true;
@@ -239,6 +247,7 @@ public class MainActivity extends AppCompatActivity
         clear.setTypeface(font);
 
         aboutFragment = new AboutFragment();
+        backupFragment = new BackupFragment();
         clearEventsFragment = new ClearEventsFragment();
         codeInstructionsFragment = new CodeInstructionsFragment();
         filtersFragment = new FiltersFragment();
@@ -271,10 +280,13 @@ public class MainActivity extends AppCompatActivity
     private void checkPermissions() {
         rxPermissions.request(Manifest.permission.ACCESS_NETWORK_STATE,
                 Manifest.permission.ACCESS_WIFI_STATE,
-                Manifest.permission.READ_PHONE_STATE)
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe(granted -> {
                     if (!granted) {
-                        Toast.makeText(this, R.string.error_permissions, Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, R.string.error_permissions,
+                                Toast.LENGTH_LONG).show();
                     }
         });
     }

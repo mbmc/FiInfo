@@ -30,9 +30,12 @@ public class NotificationSettingsFragment extends DialogFragment {
         View view = View.inflate(getActivity(), R.layout.fragment_notification_settings, null);
         unbinder = ButterKnife.bind(this, view);
 
-        enable.setChecked(PreferencesManager.getInstance(getActivity()).getBoolean(Preferences.NOTIFICATION_ENABLE));
-        sound.setChecked(PreferencesManager.getInstance(getActivity()).getBoolean(Preferences.NOTIFICATION_SOUND));
-        vibration.setChecked(PreferencesManager.getInstance(getActivity()).getBoolean(Preferences.NOTIFICATION_VIBRATE));
+        enable.setChecked(PreferencesManager.getInstance(getActivity())
+                .getBoolean(Preferences.NOTIFICATION_ENABLE));
+        sound.setChecked(PreferencesManager.getInstance(getActivity())
+                .getBoolean(Preferences.NOTIFICATION_SOUND));
+        vibration.setChecked(PreferencesManager.getInstance(getActivity())
+                .getBoolean(Preferences.NOTIFICATION_VIBRATE));
         enable(enable.isChecked());
 
         return new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme)
@@ -49,19 +52,22 @@ public class NotificationSettingsFragment extends DialogFragment {
 
     @OnCheckedChanged(R.id.notification_settings_enable)
     void enable(boolean checked) {
-        PreferencesManager.getInstance(getActivity()).setBoolean(Preferences.NOTIFICATION_ENABLE, checked);
+        PreferencesManager.getInstance(getActivity()).setBoolean(Preferences.NOTIFICATION_ENABLE,
+                checked);
         activate(sound, checked);
         activate(vibration, checked);
     }
 
     @OnCheckedChanged(R.id.notification_settings_sound)
     void sound(boolean checked) {
-        PreferencesManager.getInstance(getActivity()).setBoolean(Preferences.NOTIFICATION_SOUND, checked);
+        PreferencesManager.getInstance(getActivity()).setBoolean(Preferences.NOTIFICATION_SOUND,
+                checked);
     }
 
     @OnCheckedChanged(R.id.notification_settings_vibration)
     void vibration(boolean checked) {
-        PreferencesManager.getInstance(getActivity()).setBoolean(Preferences.NOTIFICATION_VIBRATE, checked);
+        PreferencesManager.getInstance(getActivity()).setBoolean(Preferences.NOTIFICATION_VIBRATE,
+                checked);
     }
 
 

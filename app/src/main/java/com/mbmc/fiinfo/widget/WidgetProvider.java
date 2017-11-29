@@ -58,8 +58,10 @@ public class WidgetProvider extends AppWidgetProvider {
 
         // Click
         Intent intent = new Intent(context, MainActivity.class);
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.layout_widget_4x1);
-        remoteViews.setOnClickPendingIntent(R.id.widget_container, PendingIntent.getActivity(context, 0, intent, 0));
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
+                R.layout.layout_widget_4x1);
+        remoteViews.setOnClickPendingIntent(R.id.widget_container,
+                PendingIntent.getActivity(context, 0, intent, 0));
 
         // Action 1
         setAction(context, remoteViews, Preferences.ACTION_1, R.id.widget_action_1, code1);
@@ -81,18 +83,21 @@ public class WidgetProvider extends AppWidgetProvider {
     }
 
     private Code getCode(Context context, String preference, Code defaultCode) {
-        Code code = Code.get(PreferencesManager.getInstance(context).getString(preference, defaultCode.name()));
+        Code code = Code.get(PreferencesManager.getInstance(context).getString(preference,
+                defaultCode.name()));
         if (code == Code.NONE) {
             code = defaultCode;
         }
         return code;
     }
 
-    private void setAction(Context context, RemoteViews remoteViews, String action, int viewId, Code code) {
+    private void setAction(Context context, RemoteViews remoteViews, String action, int viewId,
+                           Code code) {
         Intent intent = new Intent(context, WidgetProvider.class);
         intent.setAction(action);
         remoteViews.setTextViewText(viewId, context.getString(code.labelId));
-        remoteViews.setOnClickPendingIntent(viewId, PendingIntent.getBroadcast(context, 0, intent, 0));
+        remoteViews.setOnClickPendingIntent(viewId, PendingIntent.getBroadcast(context,
+                0, intent, 0));
     }
 
 }

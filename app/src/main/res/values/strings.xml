@@ -26,7 +26,16 @@
     <string name="code_instructions">Unlike regular secret codes, Project Fi\'s can\'t be executed directly. Upon selecting an option, the Dialer will show-up and you\'ll have to paste the code that was automatically copied into the clipboard.</string>
     <string name="code_instructions_hide">Don\'t show me again</string>
 
-    <string name="error_permissions">You need to grant \'Phone\' permission to receive events.</string>
+    <string name="backup_export">Export</string>
+    <string name="backup_export_success">Backup successful</string>
+    <string name="backup_export_error">Backup failed</string>
+    <string name="backup_import">Import</string>
+    <string name="backup_import_success">Import successful</string>
+    <string name="backup_import_error">Import failed</string>
+    <string name="backup_location">Backup location: %1$s/signal_info.db</string>
+    <string name="backup_warning">Note: importing will override current data</string>
+
+    <string name="error_permissions">You need to grant \'Phone\' permission to receive events, and \'Storage\' for backup.</string>
 
     <string name="event_boot">Phone on</string>
     <string name="event_airplane_on">Airplane mode on</string>
@@ -63,6 +72,7 @@
     <string name="icons_legend">Icons legend</string>
 
     <string name="menu_about">About</string>
+    <string name="menu_backup">Export / import</string>
     <string name="menu_carrier">Switch carrier</string>
     <string name="menu_icons">Icons</string>
     <string name="menu_info">Sim info</string>

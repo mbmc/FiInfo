@@ -17,7 +17,8 @@ public final class StringUtil {
                 break;
 
             case MOBILE:
-                string = context.getString(R.string.state_connected, connectivityEvent.name, connectivityEvent.speed);
+                string = context.getString(R.string.state_connected, connectivityEvent.name,
+                        connectivityEvent.speed);
                 break;
 
             case WIFI:

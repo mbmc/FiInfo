@@ -22,9 +22,11 @@ public class ServiceChangeReceiver extends BroadcastReceiver {
         int voiceState = bundle.getInt("voiceRegState");
         int type = bundle.getInt("dataRadioTechnology");
 
-        if (dataState == ServiceState.STATE_POWER_OFF && voiceState == ServiceState.STATE_POWER_OFF) {
+        if (dataState == ServiceState.STATE_POWER_OFF
+                && voiceState == ServiceState.STATE_POWER_OFF) {
             EventManager.getInstance().log(context, Event.MOBILE_OFF);
-        } else if (dataState == ServiceState.STATE_IN_SERVICE && voiceState == ServiceState.STATE_IN_SERVICE) {
+        } else if (dataState == ServiceState.STATE_IN_SERVICE
+                && voiceState == ServiceState.STATE_IN_SERVICE) {
             ConnectivityEvent connectivityEvent;
             String mobile = ConnectivityUtil.getMobileName(context);
             String speed = ConnectivityUtil.getSpeedFromService(type);

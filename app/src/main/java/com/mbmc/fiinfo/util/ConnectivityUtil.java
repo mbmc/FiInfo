@@ -7,7 +7,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 
-import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.data.ConnectivityEvent;
 import com.mbmc.fiinfo.data.Event;
 import com.mbmc.fiinfo.data.MobileCarrier;
@@ -19,7 +18,8 @@ public final class ConnectivityUtil {
 
 
     public static ConnectivityEvent getConnectivityEvent(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
             switch (networkInfo.getType()) {
@@ -28,7 +28,8 @@ public final class ConnectivityUtil {
                         return new ConnectivityEvent(Event.WIFI_MOBILE, getWifiName(context),
                                 getMobileName(context), getSpeed(networkInfo.getSubtype()));
                     }
-                    return new ConnectivityEvent(Event.MOBILE, getMobileName(context), getSpeed(networkInfo.getSubtype()));
+                    return new ConnectivityEvent(Event.MOBILE, getMobileName(context),
+                            getSpeed(networkInfo.getSubtype()));
 
                 case ConnectivityManager.TYPE_WIFI:
                     String speed = getSpeedIfAny(context);
@@ -149,28 +150,33 @@ public final class ConnectivityUtil {
     }
 
     public static String getMobileName(Context context) {
-        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        TelephonyManager telephonyManager =
+                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         if (telephonyManager == null) {
             return UNKNOWN;
         }
 
-        return MobileCarrier.getName(context, telephonyManager.getSimOperator(), telephonyManager.getSimOperatorName());
+        return MobileCarrier.getName(context, telephonyManager.getSimOperator(),
+                telephonyManager.getSimOperatorName());
     }
 
     public static boolean isConnectedToWifi(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
     }
 
     public static String getWifiName(Context context) {
-        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) context.getApplicationContext()
+                .getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         return wifiInfo.getSSID();
     }
 
     public static String getSpeedIfAny(Context context) {
-        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        TelephonyManager telephonyManager =
+                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         if (telephonyManager == null) {
             return UNKNOWN;
         }

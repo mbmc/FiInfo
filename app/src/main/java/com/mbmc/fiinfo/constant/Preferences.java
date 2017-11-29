@@ -1,7 +1,7 @@
 package com.mbmc.fiinfo.constant;
 
 
-public class Preferences {
+public final class Preferences {
 
     public static final String HIDE_CODE_INSTRUCTIONS = "code_instructions";
     
@@ -12,5 +12,10 @@ public class Preferences {
     public static final String ACTION_1 = "action_1";
     public static final String ACTION_2 = "action_2";
     public static final String ACTION_3 = "action_3";
+
+
+    private Preferences() {
+
+    }
 
 }

@@ -21,7 +21,8 @@ public class RecyclerView extends android.support.v7.widget.RecyclerView {
         addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrolled(android.support.v7.widget.RecyclerView recyclerView, int dx, int dy) {
-                scrollListener.scrollToTop(linearLayoutManager.findFirstCompletelyVisibleItemPosition() == 0);
+                scrollListener.scrollToTop(linearLayoutManager
+                        .findFirstCompletelyVisibleItemPosition() == 0);
             }
         });
     }

@@ -36,8 +36,10 @@ public class MiniWidgetProvider extends AppWidgetProvider {
         }
 
         Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.layout_widget_1x1);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
+                0);
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
+                R.layout.layout_widget_1x1);
         remoteViews.setOnClickPendingIntent(R.id.widget_container, pendingIntent);
 
         WidgetManager.update(context, this.getClass(), remoteViews, connectivityEvent);

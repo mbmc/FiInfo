@@ -10,10 +10,6 @@ android {
         targetSdkVersion project.ANDROID_TARGET_SDK_VERSION as int
         versionCode project.VERSION_CODE as int
         versionName VERSION_NAME
-
-        jackOptions {
-            enabled true
-        }
     }
 
     buildTypes {
@@ -38,18 +34,16 @@ android {
 }
 
 dependencies {
-    // Project
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-
     // Android
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support:recyclerview-v7:25.2.0'
+    implementation 'com.android.support:appcompat-v7:27.0.1'
+    implementation 'com.android.support:recyclerview-v7:27.0.1'
 
     // 3rd party
-    compile 'com.jakewharton:butterknife:8.5.1' // View binding
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1' // View binding
-    compile 'de.greenrobot:eventbus:2.4.0' // Event bus
-    compile 'org.parceler:parceler:1.0.4' // Parcelable
-    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.3@aar' // Permissions
-    compile 'io.reactivex.rxjava2:rxjava:2.0.7' // RxJava
+    implementation 'com.jakewharton:butterknife:8.8.1' // View binding
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1' // View binding
+    implementation 'de.greenrobot:eventbus:2.4.0' // Event bus
+    implementation 'org.parceler:parceler:1.1.9' // Parcelable
+    annotationProcessor 'org.parceler:parceler:1.1.9' // Parcelable
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar' // Permissions
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.6' // RxJava
 }

@@ -58,7 +58,8 @@ public class WidgetSettingsFragment extends DialogFragment {
                     WidgetManager.update(getActivity());
                     dialogInterface.dismiss();
                 })
-                .setNegativeButton(R.string.cancel, (DialogInterface dialogInterface, int which) -> dialogInterface.dismiss())
+                .setNegativeButton(R.string.cancel, (DialogInterface dialogInterface, int which)
+                        -> dialogInterface.dismiss())
                 .create();
     }
 
@@ -70,10 +71,12 @@ public class WidgetSettingsFragment extends DialogFragment {
 
 
     private void setSpinner(Spinner spinner, String preference, Code code) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.view_spinner_title, CHOICES);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                R.layout.view_spinner_title, CHOICES);
         adapter.setDropDownViewResource(R.layout.view_spinner_item);
         spinner.setAdapter(adapter);
-        String choice = PreferencesManager.getInstance(getActivity()).getString(preference, code.name());
+        String choice = PreferencesManager.getInstance(getActivity()).getString(preference,
+                code.name());
         spinner.setSelection(CODES.indexOf(Code.get(choice)));
     }
 
@@ -84,7 +87,8 @@ public class WidgetSettingsFragment extends DialogFragment {
     }
 
     private void save(String preference, int choice) {
-        PreferencesManager.getInstance(getActivity()).setString(preference, CODES.get(choice).name());
+        PreferencesManager.getInstance(getActivity()).setString(preference,
+                CODES.get(choice).name());
     }
 
 }

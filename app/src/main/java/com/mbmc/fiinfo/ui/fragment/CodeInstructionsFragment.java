@@ -21,7 +21,7 @@ public class CodeInstructionsFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = View.inflate(getActivity(), R.layout.view_code_instructions, null);
-        final CheckBox checkBox = (CheckBox) view.findViewById(R.id.code_instructions_check_box);
+        final CheckBox checkBox = view.findViewById(R.id.code_instructions_check_box);
 
         return new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme)
                 .setView(view)
@@ -32,7 +32,8 @@ public class CodeInstructionsFragment extends DialogFragment {
                     }
                     CodeManager.openDialer(getActivity(), code);
                 })
-                .setNegativeButton(R.string.cancel, (DialogInterface dialogInterface, int which) -> dialogInterface.dismiss())
+                .setNegativeButton(R.string.cancel, (DialogInterface dialogInterface, int which)
+                        -> dialogInterface.dismiss())
                 .create();
     }
 

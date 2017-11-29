@@ -25,9 +25,11 @@ public class EventInfo {
                 break;
 
             case WIFI_MOBILE:
-                String mobile = cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_MOBILE));
+                String mobile =
+                        cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_MOBILE));
                 iconId = WiFiMobileEvent.getIcon(context, mobile);
-                info = WiFiMobileEvent.getInfo(context, mobile, info, cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED)));
+                info = WiFiMobileEvent.getInfo(context, mobile, info,
+                        cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SPEED)));
                 break;
         }
         eventInfo.iconId = iconId;

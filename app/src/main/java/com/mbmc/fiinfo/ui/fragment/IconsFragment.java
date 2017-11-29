@@ -64,7 +64,8 @@ public class IconsFragment extends DialogFragment {
 
 
     private void addItem(int iconId, int labelId) {
-        IconLayout iconLayout = (IconLayout) View.inflate(getActivity(), R.layout.layout_icon, null);
+        IconLayout iconLayout = (IconLayout) View.inflate(getActivity(),
+                R.layout.layout_icon, null);
         iconLayout.setContent(iconId, labelId);
         container.addView(iconLayout);
     }

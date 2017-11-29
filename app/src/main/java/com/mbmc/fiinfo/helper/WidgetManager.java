@@ -9,7 +9,6 @@ import android.widget.RemoteViews;
 
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.data.ConnectivityEvent;
-import com.mbmc.fiinfo.data.Event;
 import com.mbmc.fiinfo.data.MobileEvent;
 import com.mbmc.fiinfo.data.WiFiMobileEvent;
 import com.mbmc.fiinfo.widget.MiniWidgetProvider;
@@ -49,7 +48,8 @@ public class WidgetManager {
         context.sendBroadcast(intent);
     }
 
-    public static void update(Context context, Class widget, RemoteViews remoteViews, ConnectivityEvent connectivityEvent) {
+    public static void update(Context context, Class widget, RemoteViews remoteViews,
+                              ConnectivityEvent connectivityEvent) {
         ComponentName componentName = new ComponentName(context, widget);
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         String name = connectivityEvent.name;

@@ -45,9 +45,9 @@ public class EventAdapter extends BaseCursorAdapter {
 
         public EventViewHolder(View itemView) {
             super(itemView);
-            date = (TextView) itemView.findViewById(R.id.event_date);
-            type = (ImageView) itemView.findViewById(R.id.event_type);
-            info = (TextView) itemView.findViewById(R.id.event_info);
+            date = itemView.findViewById(R.id.event_date);
+            type = itemView.findViewById(R.id.event_type);
+            info = itemView.findViewById(R.id.event_info);
         }
     }
 

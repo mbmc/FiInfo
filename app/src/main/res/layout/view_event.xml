@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/event_date"
-        android:layout_width="140dp"
+        android:layout_width="145dp"
         android:layout_height="wrap_content"
         />
 

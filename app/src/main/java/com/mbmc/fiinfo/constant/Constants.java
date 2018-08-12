@@ -11,6 +11,9 @@ public final class Constants {
     public static final Code CODE_2 = Code.T_MOBILE;
     public static final Code CODE_3 = Code.AUTO;
 
+    // WifiSsid.java
+    public static String UNKNOWN = "<unknown ssid>";
+
 
     private Constants() {
 

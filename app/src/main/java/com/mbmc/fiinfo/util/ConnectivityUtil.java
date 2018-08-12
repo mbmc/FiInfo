@@ -7,6 +7,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 
+import com.mbmc.fiinfo.constant.Constants;
 import com.mbmc.fiinfo.data.ConnectivityEvent;
 import com.mbmc.fiinfo.data.Event;
 import com.mbmc.fiinfo.data.MobileCarrier;
@@ -36,14 +37,13 @@ public final class ConnectivityUtil {
                     if (!speed.equals(UNKNOWN)) {
                         String mobile = getMobileName(context);
                         if (!mobile.equals(UNKNOWN)) {
-                            return new ConnectivityEvent(Event.WIFI_MOBILE, getWifiName(context),
-                                    mobile, speed);
+                            return new ConnectivityEvent(Event.WIFI_MOBILE,
+                                    fixWifiName(context, networkInfo), mobile, speed);
                         }
                     }
-                    return new ConnectivityEvent(Event.WIFI, getWifiName(context));
+                    return new ConnectivityEvent(Event.WIFI, fixWifiName(context, networkInfo));
             }
         }
-
         return new ConnectivityEvent(Event.DISCONNECT);
     }
 
@@ -56,7 +56,7 @@ public final class ConnectivityUtil {
             case TelephonyManager.NETWORK_TYPE_CDMA:   return "2G (CDMA)";
             case TelephonyManager.NETWORK_TYPE_IDEN:   return "2G (IDEN)";
 
-            case TelephonyManager.NETWORK_TYPE_EHRPD:  return "3G (EHRDP)";
+            case TelephonyManager.NETWORK_TYPE_EHRPD:  return "3G (EHRPD)";
             case TelephonyManager.NETWORK_TYPE_EVDO_0: return "3G (EVDO_0)";
             case TelephonyManager.NETWORK_TYPE_EVDO_A: return "3G (EVDO_A)";
             case TelephonyManager.NETWORK_TYPE_EVDO_B: return "3G (EVDO_B)";
@@ -182,6 +182,14 @@ public final class ConnectivityUtil {
         }
 
         return getSpeed(telephonyManager.getNetworkType());
+    }
+
+    public static String fixWifiName(Context context, NetworkInfo networkInfo) {
+        String ssid = getWifiName(context);
+        if (ssid.toLowerCase().contains(Constants.UNKNOWN.toLowerCase())) {
+            ssid = networkInfo.getExtraInfo();
+        }
+        return ssid;
     }
 
 

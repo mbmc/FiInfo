@@ -12,17 +12,13 @@ import com.mbmc.fiinfo.util.ConnectivityUtil;
 
 public class ConnectivityChangeReceiver extends BroadcastReceiver {
 
-    private static Event previousEvent = Event.NONE;
-
-
     @Override
     public void onReceive(Context context, Intent intent) {
         ConnectivityEvent connectivityEvent = ConnectivityUtil.getConnectivityEvent(context);
         Event event = connectivityEvent.event;
-        if (event != previousEvent && event != Event.DISCONNECT) {
+        if (event != Event.DISCONNECT) {
             EventManager.getInstance().log(context, connectivityEvent);
         }
-        previousEvent = event;
     }
 
 }

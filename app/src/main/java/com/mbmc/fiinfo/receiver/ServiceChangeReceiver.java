@@ -3,6 +3,8 @@ package com.mbmc.fiinfo.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.telephony.ServiceState;
 
@@ -31,8 +33,15 @@ public class ServiceChangeReceiver extends BroadcastReceiver {
             String mobile = ConnectivityUtil.getMobileName(context);
             String speed = ConnectivityUtil.getSpeedFromService(type);
             if (ConnectivityUtil.isConnectedToWifi(context)) {
-                String wifi = ConnectivityUtil.getWifiName(context);
-                connectivityEvent = new ConnectivityEvent(Event.WIFI_MOBILE, wifi, mobile, speed);
+                try {
+                    ConnectivityManager connectivityManager =
+                            (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                    String wifi = ConnectivityUtil.fixWifiName(context, networkInfo);
+                    connectivityEvent = new ConnectivityEvent(Event.WIFI_MOBILE, wifi, mobile, speed);
+                } catch (Exception e) {
+                    return;
+                }
             } else {
                 connectivityEvent = new ConnectivityEvent(Event.MOBILE, mobile, speed);
             }

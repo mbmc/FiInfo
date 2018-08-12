@@ -46,6 +46,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
+import io.reactivex.disposables.CompositeDisposable;
 
 
 public class MainActivity extends AppCompatActivity
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.main_progress) View progress;
 
     private RxPermissions rxPermissions;
+    private CompositeDisposable disposables = new CompositeDisposable();
 
     private AboutFragment aboutFragment;
     private BackupFragment backupFragment;
@@ -103,6 +105,14 @@ public class MainActivity extends AppCompatActivity
         NotificationManager.createChannel(this);
 
         setupUi();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (disposables != null) {
+            disposables.dispose();
+        }
+        super.onDestroy();
     }
 
     @Override
@@ -278,7 +288,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void checkPermissions() {
-        rxPermissions.request(Manifest.permission.ACCESS_NETWORK_STATE,
+        disposables.add(rxPermissions.request(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_NETWORK_STATE,
                 Manifest.permission.ACCESS_WIFI_STATE,
                 Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -288,7 +300,7 @@ public class MainActivity extends AppCompatActivity
                         Toast.makeText(this, R.string.error_permissions,
                                 Toast.LENGTH_LONG).show();
                     }
-        });
+                }));
     }
 
 }

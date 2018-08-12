@@ -35,7 +35,7 @@
     <string name="backup_location">Backup location: %1$s/signal_info.db</string>
     <string name="backup_warning">Note: importing will override current data</string>
 
-    <string name="error_permissions">You need to grant \'Phone\' permission to receive events, and \'Storage\' for backup.</string>
+    <string name="error_permissions">You need to grant \'Phone\' permission to receive events, \'Location\' to get SSID, and \'Storage\' for backup.</string>
 
     <string name="event_boot">Phone on</string>
     <string name="event_airplane_on">Airplane mode on</string>

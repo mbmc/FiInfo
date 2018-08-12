@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 
 import com.mbmc.fiinfo.constant.Constants;
 import com.mbmc.fiinfo.data.ConnectivityEvent;
@@ -188,6 +189,9 @@ public final class ConnectivityUtil {
         String ssid = getWifiName(context);
         if (ssid.toLowerCase().contains(Constants.UNKNOWN.toLowerCase())) {
             ssid = networkInfo.getExtraInfo();
+        }
+        if (TextUtils.isEmpty(ssid)) {
+            ssid = "n/a";
         }
         return ssid;
     }

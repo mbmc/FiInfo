@@ -6,7 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat;
+import androidx.core.app.NotificationCompat;
 
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.constant.Preferences;
@@ -17,12 +17,10 @@ import com.mbmc.fiinfo.data.WiFiMobileEvent;
 import com.mbmc.fiinfo.ui.activity.MainActivity;
 import com.mbmc.fiinfo.util.StringUtil;
 
-
 public class NotificationManager {
 
     private static final int ID = 0;
     private static final String CHANNEL = "signal_info";
-
 
     public static void createChannel(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -87,5 +85,4 @@ public class NotificationManager {
         ((android.app.NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE))
                 .cancel(ID);
     }
-
 }

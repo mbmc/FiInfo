@@ -10,7 +10,6 @@ import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.constant.Preferences;
 import com.mbmc.fiinfo.ui.activity.MainActivity;
 
-
 public class CodeManager {
 
     public static void send(Activity activity, int code) {
@@ -29,12 +28,10 @@ public class CodeManager {
         context.startActivity(intent);
     }
 
-
     private static void copy(Context context, int code) {
         ClipboardManager clipboardManager =
                 (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clipData = ClipData.newPlainText(context.getString(R.string.code), context.getString(R.string.code_dialer, code));
         clipboardManager.setPrimaryClip(clipData);
     }
-
 }

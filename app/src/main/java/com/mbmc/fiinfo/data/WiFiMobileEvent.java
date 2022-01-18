@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.mbmc.fiinfo.R;
 
-
 public enum WiFiMobileEvent {
 
     SPRINT(R.string.event_wifi_sprint, R.drawable.ic_wifi_sprint, R.string.carrier_sprint),
@@ -13,7 +12,6 @@ public enum WiFiMobileEvent {
     US_CELLULAR(R.string.event_wifi_us_cellular, R.drawable.ic_wifi_us_cellular, R.string.carrier_us_cellular);
 
     public int labelId, iconId, nameId;
-
 
     WiFiMobileEvent(int labelId, int iconId, int nameId) {
         this.labelId = labelId;
@@ -38,5 +36,4 @@ public enum WiFiMobileEvent {
         }
         return  info + " / " + mobile + " [" + speed + "]";
     }
-
 }

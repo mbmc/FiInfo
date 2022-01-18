@@ -20,12 +20,10 @@ import com.mbmc.fiinfo.util.ConnectivityUtil;
 
 import org.parceler.Parcels;
 
-
 public class WidgetProvider extends AppWidgetProvider {
 
     private Code code1, code2, code3;
     private ConnectivityEvent connectivityEvent;
-
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -75,7 +73,6 @@ public class WidgetProvider extends AppWidgetProvider {
         WidgetManager.update(context, this.getClass(), remoteViews, connectivityEvent);
     }
 
-
     private void getCode(Context context) {
         code1 = getCode(context, Preferences.ACTION_1, Constants.CODE_1);
         code2 = getCode(context, Preferences.ACTION_2, Constants.CODE_2);
@@ -99,5 +96,4 @@ public class WidgetProvider extends AppWidgetProvider {
         remoteViews.setOnClickPendingIntent(viewId, PendingIntent.getBroadcast(context,
                 0, intent, 0));
     }
-
 }

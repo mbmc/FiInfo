@@ -2,7 +2,6 @@ package com.mbmc.fiinfo.data;
 
 import com.mbmc.fiinfo.R;
 
-
 public enum Event {
 
     NONE(R.string.event_unknown, 0),
@@ -20,7 +19,6 @@ public enum Event {
 
     public int labelId, iconId;
 
-
     Event(int labelId, int iconId) {
         this.labelId = labelId;
         this.iconId = iconId;
@@ -33,5 +31,4 @@ public enum Event {
             return NONE;
         }
     }
-
 }

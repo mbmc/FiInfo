@@ -2,39 +2,33 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:gravity="center_vertical"
-    >
+    android:gravity="center_vertical">
 
     <TextView
         android:id="@+id/stat_count"
         android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
 
     <Space
         android:layout_width="10dp"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
     <ImageView
         android:id="@+id/stat_type"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
         android:layout_marginRight="20dp"
-        android:alpha="@dimen/icon_alpha"
-        />
+        android:alpha="@dimen/icon_alpha" />
 
     <Space
         android:layout_width="10dp"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/stat_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:singleLine="true"
-        android:ellipsize="end"
-        />
+        android:ellipsize="end" />
 
 </LinearLayout>

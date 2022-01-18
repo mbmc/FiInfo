@@ -3,9 +3,10 @@ package com.mbmc.fiinfo.ui.fragment;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.ui.activity.MainActivity;
@@ -16,13 +17,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-
 public class BackupFragment extends DialogFragment {
 
     @BindView(R.id.backup_location) TextView location;
 
     private Unbinder unbinder;
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -53,5 +52,4 @@ public class BackupFragment extends DialogFragment {
         super.onDestroyView();
         unbinder.unbind();
     }
-
 }

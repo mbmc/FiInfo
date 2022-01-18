@@ -1,19 +1,19 @@
 package com.mbmc.fiinfo.ui.adapter;
 
 import android.database.Cursor;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.data.Event;
 import com.mbmc.fiinfo.data.EventInfo;
 import com.mbmc.fiinfo.helper.Database;
 import com.mbmc.fiinfo.util.DateUtil;
-
 
 public class EventAdapter extends BaseCursorAdapter {
 
@@ -38,7 +38,6 @@ public class EventAdapter extends BaseCursorAdapter {
         viewHolder.info.setText(eventInfo.info);
     }
 
-
     private static class EventViewHolder extends RecyclerView.ViewHolder {
         TextView date, info;
         ImageView type;
@@ -50,5 +49,4 @@ public class EventAdapter extends BaseCursorAdapter {
             info = itemView.findViewById(R.id.event_info);
         }
     }
-
 }

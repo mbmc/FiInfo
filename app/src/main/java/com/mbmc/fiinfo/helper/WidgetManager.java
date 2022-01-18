@@ -16,11 +16,9 @@ import com.mbmc.fiinfo.widget.WidgetProvider;
 
 import org.parceler.Parcels;
 
-
 public class WidgetManager {
 
     public static final String EVENT = "parcelable_event";
-
 
     public static void update(Context context) {
         update(context, null);
@@ -72,5 +70,4 @@ public class WidgetManager {
         remoteViews.setTextViewText(R.id.widget_mobile, connectivityEvent.speed);
         appWidgetManager.updateAppWidget(componentName, remoteViews);
     }
-
 }

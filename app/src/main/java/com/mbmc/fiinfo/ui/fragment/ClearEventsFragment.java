@@ -3,11 +3,11 @@ package com.mbmc.fiinfo.ui.fragment;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.provider.EventProvider;
-
 
 public class ClearEventsFragment extends DialogFragment {
 
@@ -22,5 +22,4 @@ public class ClearEventsFragment extends DialogFragment {
                         -> dialogInterface.dismiss())
                 .create();
     }
-
 }

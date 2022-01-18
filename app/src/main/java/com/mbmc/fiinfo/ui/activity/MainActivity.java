@@ -6,14 +6,14 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.mbmc.fiinfo.data.Code;
 import com.mbmc.fiinfo.data.ConnectivityEvent;
@@ -26,6 +26,7 @@ import com.mbmc.fiinfo.helper.Database;
 import com.mbmc.fiinfo.helper.NotificationManager;
 import com.mbmc.fiinfo.provider.EventProvider;
 import com.mbmc.fiinfo.ui.adapter.EventAdapter;
+import com.mbmc.fiinfo.ui.component.RecyclerView;
 import com.mbmc.fiinfo.ui.component.RefreshLayout;
 import com.mbmc.fiinfo.ui.fragment.AboutFragment;
 import com.mbmc.fiinfo.ui.fragment.BackupFragment;
@@ -47,7 +48,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import io.reactivex.disposables.CompositeDisposable;
-
 
 public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<Cursor>, RefreshListener {
@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity
 
     private String selection = "";
     private EventAdapter eventAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -247,7 +246,6 @@ public class MainActivity extends AppCompatActivity
         onRefresh();
     }
 
-
     private void setupUi() {
         setCurrentFilter(R.string.filter_all);
 
@@ -302,5 +300,4 @@ public class MainActivity extends AppCompatActivity
                     }
                 }));
     }
-
 }

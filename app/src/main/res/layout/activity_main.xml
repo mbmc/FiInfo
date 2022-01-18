@@ -2,58 +2,49 @@
     android:id="@+id/main_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/default_margin"
-    >
+    android:padding="@dimen/default_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/main_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/main_state_mobile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            />
+            android:layout_height="20dp" />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:orientation="vertical"
-                android:gravity="center_vertical"
-                >
+                android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/main_current_filter"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/main_count"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -61,8 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/main_stats"
@@ -70,8 +60,7 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:text="@string/icon_stats"
-                    android:textSize="@dimen/icon_font_size"
-                    />
+                    android:textSize="@dimen/icon_font_size" />
 
                 <TextView
                     android:id="@+id/main_filter"
@@ -79,8 +68,7 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:text="@string/icon_filter"
-                    android:textSize="@dimen/icon_font_size"
-                    />
+                    android:textSize="@dimen/icon_font_size" />
 
                 <TextView
                     android:id="@+id/main_clear"
@@ -88,8 +76,7 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:text="@string/icon_trash"
-                    android:textSize="@dimen/icon_font_size"
-                    />
+                    android:textSize="@dimen/icon_font_size" />
 
             </LinearLayout>
 
@@ -97,30 +84,24 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            />
+            android:layout_height="10dp" />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <com.mbmc.fiinfo.ui.component.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="vertical"
-                />
+                android:scrollbars="vertical" />
 
             <ProgressBar
                 android:id="@+id/main_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                />
+                android:layout_gravity="center" />
 
         </FrameLayout>
-
     </LinearLayout>
-
 </com.mbmc.fiinfo.ui.component.RefreshLayout>

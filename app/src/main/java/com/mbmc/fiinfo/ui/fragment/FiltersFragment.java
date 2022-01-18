@@ -3,18 +3,17 @@ package com.mbmc.fiinfo.ui.fragment;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.data.Filter;
 import com.mbmc.fiinfo.ui.activity.MainActivity;
 
-
 public class FiltersFragment extends DialogFragment {
 
     private static final int SIZE = Filter.values().length;
     private static final CharSequence[] TITLES = new CharSequence[SIZE];
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -28,5 +27,4 @@ public class FiltersFragment extends DialogFragment {
                         ((MainActivity) getActivity()).applyFilter(Filter.values()[which]))
                 .create();
     }
-
 }

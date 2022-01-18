@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.mbmc.fiinfo.R;
 
-
 public enum MobileEvent {
 
     SPRINT(R.string.event_mobile_sprint, R.drawable.ic_sprint, R.string.carrier_sprint),
@@ -13,7 +12,6 @@ public enum MobileEvent {
     US_CELLULAR(R.string.event_mobile_us_cellular, R.drawable.ic_us_cellular, R.string.carrier_us_cellular);
 
     public int labelId, iconId, nameId;
-
 
     MobileEvent(int labelId, int iconId, int nameId) {
         this.labelId = labelId;
@@ -29,5 +27,4 @@ public enum MobileEvent {
         }
         return R.drawable.ic_mobile;
     }
-
 }

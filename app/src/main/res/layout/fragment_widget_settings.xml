@@ -4,49 +4,38 @@
     android:paddingLeft="@dimen/default_margin"
     android:paddingTop="@dimen/default_margin"
     android:paddingRight="@dimen/default_margin"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/widget_settings_height"
-        >
+        android:layout_height="@dimen/widget_settings_height">
         <TextView
             android:text="Button 1"
-            style="@style/AppTheme.WidgetSettingsTextView"
-            />
+            style="@style/AppTheme.WidgetSettingsTextView" />
         <Spinner
             android:id="@+id/widget_settings_1"
-            style="@style/AppTheme.WidgetSettingsSpinner"
-            />
+            style="@style/AppTheme.WidgetSettingsSpinner" />
     </FrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/widget_settings_height"
-        >
+        android:layout_height="@dimen/widget_settings_height">
         <TextView
             android:text="Button 2"
-            style="@style/AppTheme.WidgetSettingsTextView"
-            />
+            style="@style/AppTheme.WidgetSettingsTextView" />
         <Spinner
             android:id="@+id/widget_settings_2"
-            style="@style/AppTheme.WidgetSettingsSpinner"
-            />
+            style="@style/AppTheme.WidgetSettingsSpinner" />
     </FrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/widget_settings_height"
-        >
+        android:layout_height="@dimen/widget_settings_height">
         <TextView
             android:text="Button 3"
-            style="@style/AppTheme.WidgetSettingsTextView"
-            />
+            style="@style/AppTheme.WidgetSettingsTextView" />
         <Spinner
             android:id="@+id/widget_settings_3"
-            style="@style/AppTheme.WidgetSettingsSpinner"
-            />
+            style="@style/AppTheme.WidgetSettingsSpinner" />
     </FrameLayout>
-
 </LinearLayout>

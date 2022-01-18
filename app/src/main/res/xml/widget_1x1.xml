@@ -2,5 +2,4 @@
     android:minWidth="40dp"
     android:minHeight="40dp"
     android:initialLayout="@layout/layout_widget_1x1"
-    android:previewImage="@drawable/preview_1x1"
-    />
+    android:previewImage="@drawable/preview_1x1" />

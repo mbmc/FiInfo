@@ -6,8 +6,9 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.event.RefreshListener;
@@ -20,7 +21,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-
 public class StatsFragment extends DialogFragment
         implements LoaderManager.LoaderCallbacks<Cursor>, RefreshListener {
 
@@ -32,7 +32,6 @@ public class StatsFragment extends DialogFragment
 
     private Unbinder unbinder;
     private StatAdapter eventAdapter;
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -89,5 +88,4 @@ public class StatsFragment extends DialogFragment
     public void onRefresh() {
         getLoaderManager().restartLoader(URL_LOADER, null, this);
     }
-
 }

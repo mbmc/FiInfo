@@ -3,10 +3,11 @@ package com.mbmc.fiinfo.ui.fragment;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.constant.Constants;
@@ -22,7 +23,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-
 public class WidgetSettingsFragment extends DialogFragment {
 
     private static final List<Code> CODES = Arrays.asList(Code.AUTO, Code.REPAIR, Code.NEXT,
@@ -35,7 +35,6 @@ public class WidgetSettingsFragment extends DialogFragment {
     @BindView(R.id.widget_settings_3) Spinner spinner3;
 
     private Unbinder unbinder;
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -69,7 +68,6 @@ public class WidgetSettingsFragment extends DialogFragment {
         unbinder.unbind();
     }
 
-
     private void setSpinner(Spinner spinner, String preference, Code code) {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
                 R.layout.view_spinner_title, CHOICES);
@@ -90,5 +88,4 @@ public class WidgetSettingsFragment extends DialogFragment {
         PreferencesManager.getInstance(getActivity()).setString(preference,
                 CODES.get(choice).name());
     }
-
 }

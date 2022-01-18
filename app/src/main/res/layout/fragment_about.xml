@@ -2,25 +2,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/default_margin"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/about_version"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        />
+        android:layout_height="10dp" />
 
     <TextView
         android:id="@+id/about_privacy_policy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/about_privacy_policy"
-        />
+        android:text="@string/about_privacy_policy" />
 
 </LinearLayout>

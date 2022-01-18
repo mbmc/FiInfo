@@ -2,16 +2,15 @@ package com.mbmc.fiinfo.ui.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 
+import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class BaseCursorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private CursorAdapter cursorAdapter;
-
 
     public abstract RecyclerView.ViewHolder createCursorViewHolder(ViewGroup parent, int viewType);
     public abstract void bindCursorViewHolder(RecyclerView.ViewHolder holder,
@@ -44,7 +43,6 @@ public abstract class BaseCursorAdapter extends RecyclerView.Adapter<RecyclerVie
         notifyDataSetChanged();
     }
 
-
     private void createAdapter(Context context, Cursor cursor) {
         cursorAdapter = new CursorAdapter(context, cursor, 0) {
             @Override
@@ -58,5 +56,4 @@ public abstract class BaseCursorAdapter extends RecyclerView.Adapter<RecyclerVie
             }
         };
     }
-
 }

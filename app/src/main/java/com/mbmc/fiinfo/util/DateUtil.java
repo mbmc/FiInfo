@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.util.Locale;
 import java.util.TimeZone;
 
-
 public final class DateUtil {
 
     public static String getDate(long ms, String timeZone) {
@@ -14,9 +13,7 @@ public final class DateUtil {
         return dateFormat.format(ms);
     }
 
-
     private DateUtil() {
 
     }
-
 }

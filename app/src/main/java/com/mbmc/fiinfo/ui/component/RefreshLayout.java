@@ -1,19 +1,18 @@
 package com.mbmc.fiinfo.ui.component;
 
 import android.content.Context;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
+
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.event.RefreshListener;
 import com.mbmc.fiinfo.event.ScrollListener;
 
-
 public class RefreshLayout extends SwipeRefreshLayout
-    implements ScrollListener {
+        implements ScrollListener {
 
     private RefreshListener refreshListener;
-
 
     public RefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -41,5 +40,4 @@ public class RefreshLayout extends SwipeRefreshLayout
         setRefreshing(false);
         clearAnimation();
     }
-
 }

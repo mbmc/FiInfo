@@ -2,9 +2,10 @@ package com.mbmc.fiinfo.ui.fragment;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.data.Event;
@@ -19,7 +20,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-
 public class IconsFragment extends DialogFragment {
 
     private static final List<Event> EVENTS = Arrays.asList(
@@ -30,7 +30,6 @@ public class IconsFragment extends DialogFragment {
     @BindView(R.id.icons_container) LinearLayout container;
 
     private Unbinder unbinder;
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -62,12 +61,10 @@ public class IconsFragment extends DialogFragment {
         unbinder.unbind();
     }
 
-
     private void addItem(int iconId, int labelId) {
         IconLayout iconLayout = (IconLayout) View.inflate(getActivity(),
                 R.layout.layout_icon, null);
         iconLayout.setContent(iconId, labelId);
         container.addView(iconLayout);
     }
-
 }

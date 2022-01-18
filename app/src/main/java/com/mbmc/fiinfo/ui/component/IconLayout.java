@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.data.Event;
 
-
 public class IconLayout extends LinearLayout {
 
     public IconLayout(Context context, AttributeSet attrs) {
@@ -24,5 +23,4 @@ public class IconLayout extends LinearLayout {
         ((ImageView) findViewById(R.id.icon_icon)).setImageResource(iconId);
         ((TextView) findViewById(R.id.icon_label)).setText(labelId);
     }
-
 }

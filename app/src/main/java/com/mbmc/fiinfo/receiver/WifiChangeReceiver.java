@@ -8,7 +8,6 @@ import android.net.wifi.WifiManager;
 import com.mbmc.fiinfo.data.Event;
 import com.mbmc.fiinfo.helper.EventManager;
 
-
 public class WifiChangeReceiver extends BroadcastReceiver {
 
     @Override
@@ -20,5 +19,4 @@ public class WifiChangeReceiver extends BroadcastReceiver {
             EventManager.getInstance().log(context, Event.WIFI_OFF);
         }
     }
-
 }

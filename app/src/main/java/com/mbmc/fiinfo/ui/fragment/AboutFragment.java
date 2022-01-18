@@ -4,10 +4,11 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.text.util.Linkify;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.mbmc.fiinfo.BuildConfig;
 import com.mbmc.fiinfo.R;
@@ -18,14 +19,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-
 public class AboutFragment extends DialogFragment {
 
     @BindView(R.id.about_version) TextView version;
     @BindView(R.id.about_privacy_policy) TextView privacyPolicy;
 
     private Unbinder unbinder;
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -53,10 +52,8 @@ public class AboutFragment extends DialogFragment {
         openUrl(Constants.PRIVACY_POLICY);
     }
 
-
     private void openUrl(String url) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);
     }
-
 }

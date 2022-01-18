@@ -2,7 +2,6 @@ package com.mbmc.fiinfo.data;
 
 import com.mbmc.fiinfo.R;
 
-
 public enum Filter {
 
     ALL(R.string.filter_all, ""),
@@ -23,10 +22,8 @@ public enum Filter {
     public int stringId;
     public String selection;
 
-
     Filter(int stringId, String selection) {
         this.stringId = stringId;
         this.selection = selection;
     }
-
 }

@@ -1,18 +1,18 @@
 package com.mbmc.fiinfo.ui.adapter;
 
 import android.database.Cursor;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.data.Event;
 import com.mbmc.fiinfo.data.EventInfo;
 import com.mbmc.fiinfo.helper.Database;
-
 
 public class StatAdapter extends BaseCursorAdapter {
 
@@ -35,7 +35,6 @@ public class StatAdapter extends BaseCursorAdapter {
         viewHolder.info.setText(eventInfo.info);
     }
 
-
     private static class StatViewHolder extends RecyclerView.ViewHolder{
         TextView count, info;
         ImageView type;
@@ -47,5 +46,4 @@ public class StatAdapter extends BaseCursorAdapter {
             info = itemView.findViewById(R.id.stat_info);
         }
     }
-
 }

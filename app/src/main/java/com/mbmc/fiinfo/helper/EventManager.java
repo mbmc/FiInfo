@@ -15,7 +15,6 @@ import java.util.TimeZone;
 
 import de.greenrobot.event.EventBus;
 
-
 public class EventManager {
 
     private static final Listener.Connectivity connectivity = new Listener.Connectivity();
@@ -25,7 +24,6 @@ public class EventManager {
     private int type;
     private Integer previousType = null;
     private String name, previousName = "", mobile, previousMobile = "", speed, previousSpeed = "";
-
 
     public static EventManager getInstance() {
         if (instance == null) {
@@ -78,7 +76,6 @@ public class EventManager {
         previousSpeed = speed;
     }
 
-
     private EventManager() {
 
     }
@@ -120,5 +117,4 @@ public class EventManager {
             }
         }
     }
-
 }

@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 
-
 public final class FileUtil {
 
     public static void copy(File source, File target) throws IOException {
@@ -17,9 +16,7 @@ public final class FileUtil {
         targetChannel.close();
     }
 
-
     private FileUtil() {
 
     }
-
 }

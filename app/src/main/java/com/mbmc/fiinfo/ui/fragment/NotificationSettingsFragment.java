@@ -2,9 +2,10 @@ package com.mbmc.fiinfo.ui.fragment;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Switch;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.constant.Preferences;
@@ -15,7 +16,6 @@ import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.Unbinder;
 
-
 public class NotificationSettingsFragment extends DialogFragment {
 
     @BindView(R.id.notification_settings_enable) Switch enable;
@@ -23,7 +23,6 @@ public class NotificationSettingsFragment extends DialogFragment {
     @BindView(R.id.notification_settings_vibration) Switch vibration;
 
     private Unbinder unbinder;
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -70,10 +69,8 @@ public class NotificationSettingsFragment extends DialogFragment {
                 checked);
     }
 
-
     private void activate(Switch switchView, boolean activate) {
         switchView.setEnabled(activate);
         switchView.setAlpha(activate ? 1.0f : 0.5f);
     }
-
 }

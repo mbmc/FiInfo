@@ -13,11 +13,9 @@ import com.mbmc.fiinfo.data.ConnectivityEvent;
 import com.mbmc.fiinfo.data.Event;
 import com.mbmc.fiinfo.data.MobileCarrier;
 
-
 public final class ConnectivityUtil {
 
-    private static String UNKNOWN = "Unknown";
-
+    private static final String UNKNOWN = "Unknown";
 
     public static ConnectivityEvent getConnectivityEvent(Context context) {
         ConnectivityManager connectivityManager =
@@ -69,6 +67,12 @@ public final class ConnectivityUtil {
 
             case TelephonyManager.NETWORK_TYPE_LTE:    return "4G (LTE)";
 
+            case 16: return "2G (GSM)";
+            case 17: return "3G (TD-SCDMA)";
+            case 18: return "IWLAN";
+            case 19: return "4G (LTE_CA)";
+            case 20: return "5G (NR)";
+
             case TelephonyManager.NETWORK_TYPE_UNKNOWN:
             default:
                 return UNKNOWN;
@@ -93,38 +97,53 @@ public final class ConnectivityUtil {
         public static final int RIL_RADIO_TECHNOLOGY_EHRPD = 13;
         public static final int RIL_RADIO_TECHNOLOGY_LTE = 14;
         public static final int RIL_RADIO_TECHNOLOGY_HSPAP = 15;
+        public static final int RIL_RADIO_TECHNOLOGY_GSM = 16;
+        public static final int RIL_RADIO_TECHNOLOGY_TD_SCDMA = 17;
+        public static final int RIL_RADIO_TECHNOLOGY_IWLAN = 18;
+        public static final int RIL_RADIO_TECHNOLOGY_LTE_CA = 19;
+        public static final int RIL_RADIO_TECHNOLOGY_NR = 20;
 
-        case ServiceState.RIL_RADIO_TECHNOLOGY_GPRS:
-            return TelephonyManager.NETWORK_TYPE_GPRS;
-        case ServiceState.RIL_RADIO_TECHNOLOGY_EDGE:
-            return TelephonyManager.NETWORK_TYPE_EDGE;
-        case ServiceState.RIL_RADIO_TECHNOLOGY_UMTS:
-            return TelephonyManager.NETWORK_TYPE_UMTS;
-        case ServiceState.RIL_RADIO_TECHNOLOGY_HSDPA:
-            return TelephonyManager.NETWORK_TYPE_HSDPA;
-        case ServiceState.RIL_RADIO_TECHNOLOGY_HSUPA:
-            return TelephonyManager.NETWORK_TYPE_HSUPA;
-        case ServiceState.RIL_RADIO_TECHNOLOGY_HSPA:
-            return TelephonyManager.NETWORK_TYPE_HSPA;
-        case ServiceState.RIL_RADIO_TECHNOLOGY_IS95A:
-        case ServiceState.RIL_RADIO_TECHNOLOGY_IS95B:
-            return TelephonyManager.NETWORK_TYPE_CDMA;
-        case ServiceState.RIL_RADIO_TECHNOLOGY_1xRTT:
-            return TelephonyManager.NETWORK_TYPE_1xRTT;
-        case ServiceState.RIL_RADIO_TECHNOLOGY_EVDO_0:
-            return TelephonyManager.NETWORK_TYPE_EVDO_0;
-        case ServiceState.RIL_RADIO_TECHNOLOGY_EVDO_A:
-            return TelephonyManager.NETWORK_TYPE_EVDO_A;
-        case ServiceState.RIL_RADIO_TECHNOLOGY_EVDO_B:
-            return TelephonyManager.NETWORK_TYPE_EVDO_B;
-        case ServiceState.RIL_RADIO_TECHNOLOGY_EHRPD:
-            return TelephonyManager.NETWORK_TYPE_EHRPD;
-        case ServiceState.RIL_RADIO_TECHNOLOGY_LTE:
-            return TelephonyManager.NETWORK_TYPE_LTE;
-        case ServiceState.RIL_RADIO_TECHNOLOGY_HSPAP:
-            return TelephonyManager.NETWORK_TYPE_HSPAP;
-        default:
-            return TelephonyManager.NETWORK_TYPE_UNKNOWN;
+            case RIL_RADIO_TECHNOLOGY_GPRS:
+                return TelephonyManager.NETWORK_TYPE_GPRS;
+            case RIL_RADIO_TECHNOLOGY_EDGE:
+                return TelephonyManager.NETWORK_TYPE_EDGE;
+            case RIL_RADIO_TECHNOLOGY_UMTS:
+                return TelephonyManager.NETWORK_TYPE_UMTS;
+            case RIL_RADIO_TECHNOLOGY_HSDPA:
+                return TelephonyManager.NETWORK_TYPE_HSDPA;
+            case RIL_RADIO_TECHNOLOGY_HSUPA:
+                return TelephonyManager.NETWORK_TYPE_HSUPA;
+            case RIL_RADIO_TECHNOLOGY_HSPA:
+                return TelephonyManager.NETWORK_TYPE_HSPA;
+            case RIL_RADIO_TECHNOLOGY_IS95A:
+            case RIL_RADIO_TECHNOLOGY_IS95B:
+                return TelephonyManager.NETWORK_TYPE_CDMA;
+            case RIL_RADIO_TECHNOLOGY_1xRTT:
+                return TelephonyManager.NETWORK_TYPE_1xRTT;
+            case RIL_RADIO_TECHNOLOGY_EVDO_0:
+                return TelephonyManager.NETWORK_TYPE_EVDO_0;
+            case RIL_RADIO_TECHNOLOGY_EVDO_A:
+                return TelephonyManager.NETWORK_TYPE_EVDO_A;
+            case RIL_RADIO_TECHNOLOGY_EVDO_B:
+                return TelephonyManager.NETWORK_TYPE_EVDO_B;
+            case RIL_RADIO_TECHNOLOGY_EHRPD:
+                return TelephonyManager.NETWORK_TYPE_EHRPD;
+            case RIL_RADIO_TECHNOLOGY_LTE:
+                return TelephonyManager.NETWORK_TYPE_LTE;
+            case RIL_RADIO_TECHNOLOGY_HSPAP:
+                return TelephonyManager.NETWORK_TYPE_HSPAP;
+            case RIL_RADIO_TECHNOLOGY_GSM:
+                return TelephonyManager.NETWORK_TYPE_GSM;
+            case RIL_RADIO_TECHNOLOGY_TD_SCDMA:
+                return TelephonyManager.NETWORK_TYPE_TD_SCDMA;
+            case RIL_RADIO_TECHNOLOGY_IWLAN:
+                return TelephonyManager.NETWORK_TYPE_IWLAN;
+            case RIL_RADIO_TECHNOLOGY_LTE_CA:
+                return TelephonyManager.NETWORK_TYPE_LTE_CA;
+            case RIL_RADIO_TECHNOLOGY_NR:
+                return TelephonyManager.NETWORK_TYPE_NR;
+            default:
+                return TelephonyManager.NETWORK_TYPE_UNKNOWN;
      */
     public static String getSpeedFromService(int type) {
         int speed;
@@ -144,7 +163,12 @@ public final class ConnectivityUtil {
             case 12: speed = TelephonyManager.NETWORK_TYPE_EVDO_B; break;
             case 13: speed = TelephonyManager.NETWORK_TYPE_EHRPD; break;
             case 14: speed = TelephonyManager.NETWORK_TYPE_LTE; break;
-            case 15: speed = TelephonyManager.NETWORK_TYPE_GPRS; break;
+            case 15: speed = TelephonyManager.NETWORK_TYPE_HSPAP; break;
+            case 16: speed = 16 /*TelephonyManager.NETWORK_TYPE_GSM*/; break;
+            case 17: speed = 17 /*TelephonyManager.NETWORK_TYPE_TD_SCDMA*/; break;
+            case 18: speed = 18 /*TelephonyManager.NETWORK_TYPE_IWLAN*/; break;
+            case 19: speed = 19 /*TelephonyManager.NETWORK_TYPE_LTE_CA*/; break;
+            case 20: speed = 20 /*TelephonyManager.NETWORK_TYPE_NR*/; break;
             default: speed = TelephonyManager.NETWORK_TYPE_HSPAP; break;
         }
         return getSpeed(speed);
@@ -196,9 +220,7 @@ public final class ConnectivityUtil {
         return ssid;
     }
 
-
     private ConnectivityUtil() {
 
     }
-
 }

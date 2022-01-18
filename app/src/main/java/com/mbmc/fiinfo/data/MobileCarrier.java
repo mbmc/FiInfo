@@ -7,7 +7,6 @@ import com.mbmc.fiinfo.R;
 import java.util.Arrays;
 import java.util.List;
 
-
 public enum MobileCarrier {
 
     SPRINT (R.string.carrier_sprint, "3102", "310120", "312530", "316010",
@@ -20,7 +19,6 @@ public enum MobileCarrier {
 
     public int labelId;
     public List<String> mccmnc;
-
 
     MobileCarrier(int labelId, String... mccmnc) {
         this.labelId = labelId;
@@ -35,5 +33,4 @@ public enum MobileCarrier {
         }
         return simName;
     }
-
 }

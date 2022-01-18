@@ -15,11 +15,9 @@ import com.mbmc.fiinfo.util.ConnectivityUtil;
 
 import org.parceler.Parcels;
 
-
 public class MiniWidgetProvider extends AppWidgetProvider {
 
     private ConnectivityEvent connectivityEvent;
-
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -44,5 +42,4 @@ public class MiniWidgetProvider extends AppWidgetProvider {
 
         WidgetManager.update(context, this.getClass(), remoteViews, connectivityEvent);
     }
-
 }

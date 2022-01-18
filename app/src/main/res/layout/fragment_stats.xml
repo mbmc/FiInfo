@@ -2,83 +2,69 @@
     android:id="@+id/stats_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/default_margin"
-    >
+    android:padding="@dimen/default_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/stat_header_count"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="@string/stat_count"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <Space
                 android:layout_width="10dp"
-                android:layout_height="match_parent"
-                />
+                android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/stat_header_type"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="@string/stat_type"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <Space
                 android:layout_width="10dp"
-                android:layout_height="match_parent"
-                />
+                android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/stat_header_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/stat_info"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            />
+            android:layout_height="10dp" />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <com.mbmc.fiinfo.ui.component.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="vertical"
-                />
+                android:scrollbars="vertical" />
 
             <ProgressBar
                 android:id="@+id/stats_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                />
+                android:layout_gravity="center" />
 
         </FrameLayout>
-
     </LinearLayout>
-
 </com.mbmc.fiinfo.ui.component.RefreshLayout>

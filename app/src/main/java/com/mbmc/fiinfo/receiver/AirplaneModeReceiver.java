@@ -7,7 +7,6 @@ import android.content.Intent;
 import com.mbmc.fiinfo.data.Event;
 import com.mbmc.fiinfo.helper.EventManager;
 
-
 public class AirplaneModeReceiver extends BroadcastReceiver {
 
     @Override
@@ -17,5 +16,4 @@ public class AirplaneModeReceiver extends BroadcastReceiver {
                         ? Event.AIRPLANE_ON
                         : Event.AIRPLANE_OFF);
     }
-
 }

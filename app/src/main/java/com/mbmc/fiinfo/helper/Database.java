@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-
 public class Database extends SQLiteOpenHelper {
 
     public static final String TABLE_EVENT = "event";
@@ -33,7 +32,6 @@ public class Database extends SQLiteOpenHelper {
             + COLUMN_SPEED + " TEXT"
             + ");";
 
-
     public Database(Context context) {
         super(context, NAME, null, VERSION);
     }
@@ -54,5 +52,4 @@ public class Database extends SQLiteOpenHelper {
             }
         }
     }
-
 }

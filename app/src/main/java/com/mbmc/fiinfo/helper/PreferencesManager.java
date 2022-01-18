@@ -3,7 +3,6 @@ package com.mbmc.fiinfo.helper;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-
 public class PreferencesManager {
 
     private static final String FILE = "user_preferences";
@@ -13,7 +12,6 @@ public class PreferencesManager {
     private static PreferencesManager instance;
 
     private SharedPreferences sharedPreferences;
-
 
     public static PreferencesManager getInstance(Context context) {
         if (instance == null) {
@@ -50,9 +48,7 @@ public class PreferencesManager {
         editor.apply();
     }
 
-
     private PreferencesManager(Context context) {
         sharedPreferences = context.getSharedPreferences(FILE, Context.MODE_PRIVATE);
     }
-
 }

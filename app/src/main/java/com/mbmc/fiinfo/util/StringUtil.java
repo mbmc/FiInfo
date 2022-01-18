@@ -5,7 +5,6 @@ import android.content.Context;
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.data.ConnectivityEvent;
 
-
 public final class StringUtil {
 
     public static String getConnectionName(Context context, ConnectivityEvent connectivityEvent) {
@@ -30,9 +29,7 @@ public final class StringUtil {
         return string;
     }
 
-
     private StringUtil() {
 
     }
-
 }

@@ -5,12 +5,10 @@ import android.database.Cursor;
 
 import com.mbmc.fiinfo.helper.Database;
 
-
 public class EventInfo {
 
     public int iconId;
     public String info;
-
 
     public static EventInfo get(Context context, Event event, Cursor cursor) {
         EventInfo eventInfo = new EventInfo();
@@ -36,5 +34,4 @@ public class EventInfo {
         eventInfo.info = info;
         return eventInfo;
     }
-
 }

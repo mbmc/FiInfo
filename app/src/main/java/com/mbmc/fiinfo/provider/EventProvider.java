@@ -15,7 +15,6 @@ import com.mbmc.fiinfo.helper.Database;
 
 import java.util.Map;
 
-
 public class EventProvider extends ContentProvider {
 
     private static final String AUTHORITY = BuildConfig.APPLICATION_ID + ".provider";
@@ -41,7 +40,6 @@ public class EventProvider extends ContentProvider {
 
     private Database database;
     private Map<String, String> map;
-
 
     @Override
     public boolean onCreate() {
@@ -133,5 +131,4 @@ public class EventProvider extends ContentProvider {
     public int update(Uri uri, ContentValues contentValues, String s, String[] strings) {
         return 0;
     }
-
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mbmc.fiinfo"
-    >
+    package="com.mbmc.fiinfo">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,13 +14,11 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTop"
-            >
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -60,16 +57,14 @@
         <provider
             android:name=".provider.EventProvider"
             android:exported="false"
-            android:authorities="com.mbmc.fiinfo.provider"
-            />
+            android:authorities="com.mbmc.fiinfo.provider" />
         <receiver android:name="com.mbmc.fiinfo.widget.MiniWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_1x1"
-                />
+                android:resource="@xml/widget_1x1" />
         </receiver>
         <receiver android:name="com.mbmc.fiinfo.widget.WidgetProvider">
             <intent-filter>
@@ -77,10 +72,7 @@
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_4x1"
-                />
+                android:resource="@xml/widget_4x1" />
         </receiver>
-
     </application>
-
 </manifest>

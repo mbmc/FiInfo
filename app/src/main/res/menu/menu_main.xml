@@ -1,56 +1,47 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity">
 
     <item
         android:id="@+id/main_action_backup"
         android:title="@string/menu_backup"
         android:icon="@drawable/ic_save"
-        app:showAsAction="always"
-        />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/main_action_notification"
         android:title="@string/menu_notification"
-        app:showAsAction="never"
-        />
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/main_action_widget"
         android:title="@string/menu_widget"
-        app:showAsAction="never"
-        />
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/main_action_info"
         android:title="@string/menu_info"
-        app:showAsAction="never"
-        />
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/main_action_qr"
         android:title="@string/menu_qr"
-        app:showAsAction="never"
-        />
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/main_action_carrier"
         android:title="@string/menu_carrier"
-        app:showAsAction="never"
-        />
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/main_action_icons"
         android:title="@string/menu_icons"
-        app:showAsAction="never"
-        />
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/main_action_about"
         android:title="@string/menu_about"
-        app:showAsAction="never"
-        />
+        app:showAsAction="never" />
 
 </menu>

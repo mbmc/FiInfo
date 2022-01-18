@@ -3,20 +3,19 @@ package com.mbmc.fiinfo.ui.fragment;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.CheckBox;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.mbmc.fiinfo.R;
 import com.mbmc.fiinfo.constant.Preferences;
 import com.mbmc.fiinfo.helper.CodeManager;
 import com.mbmc.fiinfo.helper.PreferencesManager;
 
-
 public class CodeInstructionsFragment extends DialogFragment {
 
     private int code;
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -40,5 +39,4 @@ public class CodeInstructionsFragment extends DialogFragment {
     public void setCode(int code) {
         this.code = code;
     }
-
 }

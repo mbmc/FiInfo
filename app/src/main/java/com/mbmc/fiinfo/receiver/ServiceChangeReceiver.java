@@ -13,7 +13,6 @@ import com.mbmc.fiinfo.data.Event;
 import com.mbmc.fiinfo.helper.EventManager;
 import com.mbmc.fiinfo.util.ConnectivityUtil;
 
-
 public class ServiceChangeReceiver extends BroadcastReceiver {
 
     @Override
@@ -48,5 +47,4 @@ public class ServiceChangeReceiver extends BroadcastReceiver {
             EventManager.getInstance().log(context, connectivityEvent);
         }
     }
-
 }

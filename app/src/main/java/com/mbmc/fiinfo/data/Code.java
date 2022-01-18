@@ -2,7 +2,6 @@ package com.mbmc.fiinfo.data;
 
 import com.mbmc.fiinfo.R;
 
-
 public enum Code {
 
     NONE(0, 0),
@@ -19,7 +18,6 @@ public enum Code {
     public int code;
     public int labelId;
 
-
     Code(int code, int labelId) {
         this.code = code;
         this.labelId = labelId;
@@ -28,5 +26,4 @@ public enum Code {
     public static Code get(String name) {
         return valueOf(name);
     }
-
 }

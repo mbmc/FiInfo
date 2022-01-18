@@ -3,11 +3,9 @@ package com.mbmc.fiinfo.ui.fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 
-
 public class DialogFragment extends android.app.DialogFragment {
 
     private boolean shown;
-
 
     @Override
     public void show(FragmentManager manager, String tag) {
@@ -23,5 +21,4 @@ public class DialogFragment extends android.app.DialogFragment {
         super.onDismiss(dialogInterface);
         shown = false;
     }
-
 }

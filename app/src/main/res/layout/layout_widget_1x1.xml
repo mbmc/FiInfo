@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="4dp"
-    android:background="@color/white_alpha"
-    >
+    android:background="@color/white_alpha">
 
     <TextView
         android:id="@+id/widget_connected"
@@ -12,16 +11,14 @@
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:ellipsize="end"
-        style="@style/TextViewStyle"
-        />
+        style="@style/TextViewStyle" />
 
     <ImageView
         android:id="@+id/widget_icon"
         android:layout_width="@dimen/widget_icon_size"
         android:layout_height="@dimen/widget_icon_size"
         android:layout_gravity="center"
-        android:alpha="@dimen/icon_alpha"
-        />
+        android:alpha="@dimen/icon_alpha" />
 
     <TextView
         android:id="@+id/widget_mobile"
@@ -30,7 +27,6 @@
         android:layout_gravity="bottom|right"
         android:singleLine="true"
         android:ellipsize="end"
-        style="@style/TextViewStyle"
-        />
+        style="@style/TextViewStyle" />
 
 </FrameLayout>

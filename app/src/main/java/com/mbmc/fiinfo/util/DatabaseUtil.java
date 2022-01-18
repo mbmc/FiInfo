@@ -10,14 +10,12 @@ import com.mbmc.fiinfo.helper.Database;
 import java.io.File;
 import java.io.IOException;
 
-
 public final class DatabaseUtil {
 
     private static final String FILE = "signal_info.db";
     private static final File BACKUP =
             new File(Environment.getExternalStoragePublicDirectory(
                     Environment.DIRECTORY_DOWNLOADS), FILE);
-
 
     public static void export(Context context) {
         try {
@@ -31,6 +29,10 @@ public final class DatabaseUtil {
 
     public static void replace(Context context) {
         try {
+            File file = context.getDatabasePath(Database.NAME + "-wal");
+            if (file.exists()) {
+                file.delete();
+            }
             FileUtil.copy(BACKUP, context.getDatabasePath(Database.NAME));
             Toast.makeText(context, R.string.backup_import_success, Toast.LENGTH_LONG).show();
         } catch (IOException e) {
@@ -39,9 +41,7 @@ public final class DatabaseUtil {
         }
     }
 
-
     private DatabaseUtil() {
 
     }
-
 }

@@ -1,17 +1,19 @@
 buildscript {
+    apply from: "versions.gradle"
+
     repositories {
-        mavenCentral()
         google()
+        mavenCentral()
     }
+
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.3'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31'
+        classpath "com.android.tools.build:gradle:$android.gradle_plugin"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$android.navigation"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$android.hilt"
     }
 }
 
-allprojects {
-    repositories {
-        jcenter()
-        google()
-    }
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }

@@ -1,70 +1,64 @@
-<com.mbmc.fiinfo.ui.component.RefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/stats_refresh"
+<?xml version="1.0" encoding="utf-8"?>
+<!-- necessary to be full screen and respect the constraints -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/default_margin">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:paddingTop="@dimen/spacing_default"
+        android:paddingStart="@dimen/spacing_default"
+        android:paddingEnd="@dimen/spacing_default">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="@dimen/size_50"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/count"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="@dimen/size_50"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_10"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/count"
+            android:text="@string/type"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/details"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/type"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/details"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/stat_header_count"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:text="@string/stat_count"
-                android:textStyle="bold" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/stats"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/size_10"
+            app:layout_constraintTop_toBottomOf="@id/count"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="match_parent" />
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:indeterminate="true" />
 
-            <TextView
-                android:id="@+id/stat_header_type"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:text="@string/stat_type"
-                android:textStyle="bold" />
-
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="match_parent" />
-
-            <TextView
-                android:id="@+id/stat_header_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/stat_info"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.mbmc.fiinfo.ui.component.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical" />
-
-            <ProgressBar
-                android:id="@+id/stats_progress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-
-        </FrameLayout>
-    </LinearLayout>
-</com.mbmc.fiinfo.ui.component.RefreshLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

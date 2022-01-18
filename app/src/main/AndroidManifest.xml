@@ -2,77 +2,52 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mbmc.fiinfo">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- Foreground service -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- ConnectivityService -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- NetworkCallback -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <!-- WifiManager -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- Cellular service change -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- Boot -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- Wi-Fi name -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:name="com.mbmc.fiinfo.ui.Application"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SignalInfo">
         <activity
-            android:name=".ui.activity.MainActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTop">
+            android:name="com.mbmc.fiinfo.ui.MainActivity"
+            android:launchMode="singleTop"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".receiver.AirplaneModeReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.AIRPLANE_MODE"/>
-            </intent-filter>
-        </receiver>
-        <receiver android:name=".receiver.BootReceiver">
+        <receiver android:name="com.mbmc.fiinfo.receiver.BootReceiver" android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".receiver.ConnectivityChangeReceiver">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name=".receiver.ServiceChangeReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.SERVICE_STATE" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name=".receiver.ShutdownReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name=".receiver.WifiChangeReceiver">
-            <intent-filter>
-                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
-            </intent-filter>
-        </receiver>
-        <provider
-            android:name=".provider.EventProvider"
-            android:exported="false"
-            android:authorities="com.mbmc.fiinfo.provider" />
-        <receiver android:name="com.mbmc.fiinfo.widget.MiniWidgetProvider">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_1x1" />
-        </receiver>
-        <receiver android:name="com.mbmc.fiinfo.widget.WidgetProvider">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_4x1" />
-        </receiver>
+        <service android:name="com.mbmc.fiinfo.service.EventService" android:foregroundServiceType="location" />
     </application>
 </manifest>

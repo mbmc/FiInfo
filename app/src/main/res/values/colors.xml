@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="fi_blue">#5687EC</color>
 
-    <color name="black">#000000</color>
-    <color name="white">#FFFFFF</color>
-    <color name="white_alpha">#BBFFFFFF</color>
-    <color name="font">#8C000000</color>
+    <!--
+    http://marcodiiga.github.io/rgba-to-rgb-conversion
+    https://www.binaryhexconverter.com/hex-to-decimal-converter
+    -->
 
-    <color name="fi_blue">#11C0D7</color>
-    <color name="fi_green">#25A667</color>
-    <color name="fi_yellow">#FFC30F</color>
+    <!-- dark mode -->
+    <!--<color name="icon_dark">#b3ffffff</color>-->
+    <!-- b3 hex -> 179 decimal -> 0.701 alpha -->
+    <color name="font_night">#b3b3b3</color>
 
+    <!-- light mode -->
+    <!--<color name="icon_light">#8a000000</color>-->
+    <!-- 8a hex -> 139 decimal -> 0.545 alpha -->
+    <color name="font_day">#757575</color>
 </resources>

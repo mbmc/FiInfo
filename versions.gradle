@@ -1,0 +1,28 @@
+ext {
+    kotlin = "1.6.10"
+    android = [
+            sdk: [
+                    compile: 31,
+                    min: 31,
+                    target: 31
+            ],
+            activity_fragment_ktx: "1.4.0",
+            constraintlayout: "2.1.2",
+            core_ktx: "1.7.0",
+            gradle_plugin: "7.0.4",
+            hilt: "2.40.5",
+            lifecycle: "2.4.0",
+            material: "1.4.0",
+            navigation: "2.3.5",
+            paging: "3.1.0",
+            recyclerview: "1.2.1",
+            room: "2.4.0",
+    ]
+    app = [
+            id: "com.mbmc.fiinfo",
+            release: [
+                    version: "0.2.0",
+                    code: 14
+            ]
+    ]
+}

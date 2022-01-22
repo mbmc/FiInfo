@@ -1,6 +1,5 @@
 package com.mbmc.fiinfo.ui
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -15,6 +14,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.snackbar.Snackbar
 import com.mbmc.fiinfo.R
 import com.mbmc.fiinfo.databinding.ActivityMainBinding
+import com.mbmc.fiinfo.util.PHONE_PERMISSION
 import com.mbmc.fiinfo.util.settings
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,8 +50,8 @@ class MainActivity : AppCompatActivity() {
         navController.navigateUp()
 
     private fun checkPermissions() {
-        if (checkSelfPermission(PERMISSION) != PackageManager.PERMISSION_GRANTED) {
-            permissionsChecker.launch(PERMISSION)
+        if (checkSelfPermission(PHONE_PERMISSION) != PackageManager.PERMISSION_GRANTED) {
+            permissionsChecker.launch(PHONE_PERMISSION)
         } else {
             bindUi()
         }
@@ -59,12 +59,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkRationale(granted: Boolean) {
         if (!granted) {
-            val rationale = shouldShowRequestPermissionRationale(PERMISSION)
+            val rationale = shouldShowRequestPermissionRationale(PHONE_PERMISSION)
             val reason =
                 if (!rationale) {
-                    R.string.permissions_require_settings
+                    R.string.permission_required_settings
                 } else {
-                    R.string.permissions_required
+                    R.string.permission_required
                 }
             Snackbar.make(
                 root,
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                 .apply {
                     setAction(R.string.ok) {
                         if (rationale) {
-                            permissionsChecker.launch(PERMISSION)
+                            permissionsChecker.launch(PHONE_PERMISSION)
                         } else {
                             startForResult.launch(Intent().settings(this@MainActivity))
                         }
@@ -91,9 +91,5 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         navController.graph = navController.navInflater.inflate(R.navigation.graph)
         setupActionBarWithNavController(navController)
-    }
-
-    companion object {
-        private const val PERMISSION = Manifest.permission.READ_PHONE_STATE
     }
 }

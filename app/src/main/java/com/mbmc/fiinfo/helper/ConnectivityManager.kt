@@ -1,8 +1,8 @@
 package com.mbmc.fiinfo.helper
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.pm.PackageManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.wifi.SupplicantState
@@ -13,9 +13,12 @@ import android.net.wifi.WifiManager
 import android.telephony.TelephonyDisplayInfo
 import android.telephony.TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NONE
 import android.telephony.TelephonyManager.NETWORK_TYPE_UNKNOWN
+import android.widget.Toast
+import com.mbmc.fiinfo.R
 import com.mbmc.fiinfo.data.*
 import com.mbmc.fiinfo.util.*
 import dagger.hilt.android.qualifiers.ApplicationContext
+import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -27,7 +30,7 @@ class ConnectivityManager @Inject constructor(
     private val eventManager: EventManager
 ) {
 
-    private var networks = mutableMapOf<String, Event>()
+    private var networks = ConcurrentHashMap<String, Event>()
 
     private lateinit var wifiManager: WifiManager
     private lateinit var connectivityManager: AndroidConnectivityManager
@@ -77,7 +80,7 @@ class ConnectivityManager @Inject constructor(
                 if (telephonyDisplayInfo.overrideNetworkType != OVERRIDE_NETWORK_TYPE_NONE) {
                     updateSpeedOverride(event, telephonyDisplayInfo.overrideNetworkType)
                 }
-                Log.d(DEBUG_INFO, "telephonyDisplayInfo: $telephonyDisplayInfo")
+                Log.d(DEBUG_TAG, "telephonyDisplayInfo: $telephonyDisplayInfo")
                 logEvent()
             }
         }
@@ -92,23 +95,22 @@ class ConnectivityManager @Inject constructor(
             return
         }
 
-        Log.d(DEBUG_INFO, "onCapabilitiesChanged: $networkCapabilities")
+        Log.d(DEBUG_TAG, "onCapabilitiesChanged: $networkCapabilities")
         if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
             val wifiInfo = networkCapabilities.transportInfo as WifiInfo
             val currentSsid = networks[network.toString()]?.ssid
-            val ssid = wifiInfo.ssid
+            val ssid = wifiInfo.fixSsid()
             networks[network.toString()]?.frequency = wifiInfo.getDetails()
             // Only update the SSID if it's different
             if (wifiInfo.supplicantState == SupplicantState.COMPLETED && currentSsid != ssid) {
-                Log.d(DEBUG_INFO, "updating wifi from $currentSsid to $ssid")
+                Log.d(DEBUG_TAG, "updating wifi from $currentSsid to $ssid")
                 networks[network.toString()]?.ssid = ssid
                 // new ssid will be displayed on the next event
             }
         } else if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
             && networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
         ) {
-            networks[network.toString()] = telephonyManager.toEvent()
-            telephonyDetails()
+            updateCellular(network)
         }
     }
 
@@ -120,7 +122,16 @@ class ConnectivityManager @Inject constructor(
         updateNetwork(network, false)
     }
 
-    @SuppressLint("MissingPermission")
+    private fun updateCellular(network: Network) {
+        if (context.checkSelfPermission(PHONE_PERMISSION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(context, R.string.permission_required, Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        networks[network.toString()] = telephonyManager.toEvent()
+        telephonyDetails()
+    }
+
     private fun updateNetwork(network: Network, add: Boolean, noLog: Boolean = false) {
         // TODO: fetch everytime?
         connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as AndroidConnectivityManager
@@ -130,29 +141,28 @@ class ConnectivityManager @Inject constructor(
         val capabilities = connectivityManager.getNetworkCapabilities(network)
 
         if (!add) {
-            Log.d(DEBUG_INFO, "remove $network $networks")
+            Log.d(DEBUG_TAG, "remove $network $networks")
             networks.remove(network.toString())
-            Log.d(DEBUG_INFO, "remove $networks")
+            Log.d(DEBUG_TAG, "remove $networks")
         } else {
             if (capabilities?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true) {
-                Log.d(DEBUG_INFO, "has wifi transport")
+                Log.d(DEBUG_TAG, "has wifi transport")
                 val wifiInfo = wifiManager.connectionInfo
-                Log.d(DEBUG_INFO, "connection has wifi state: ${wifiInfo.supplicantState}")
+                Log.d(DEBUG_TAG, "connection has wifi state: ${wifiInfo.supplicantState}")
                 if (wifiInfo.supplicantState == SupplicantState.COMPLETED) {
                     networks[network.toString()] = Event(
                         type = Type.WIFI,
-                        ssid = wifiInfo.ssid,
+                        ssid = wifiInfo.fixSsid(),
                         frequency = wifiInfo.getDetails()
                     )
                 }
             } else if (capabilities?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) == true) {
-                telephonyDetails()
-                networks[network.toString()] = telephonyManager.toEvent()
+                updateCellular(network)
             }
         }
 
-        Log.d(DEBUG_INFO, "networks: $networks")
-        Log.d(DEBUG_INFO, "callback capabilities: $capabilities")
+        Log.d(DEBUG_TAG, "networks: $networks")
+        Log.d(DEBUG_TAG, "callback capabilities: $capabilities")
 
         if (noLog) {
             return
@@ -198,7 +208,7 @@ class ConnectivityManager @Inject constructor(
 
     private fun telephonyDetails() {
         Log.d(
-            DEBUG_INFO, "cellular update ${telephonyManager.simCarrierIdName},"
+            DEBUG_TAG, "cellular update ${telephonyManager.simCarrierIdName},"
                     + " ${telephonyManager.simOperator}" //
                     + ", ${telephonyManager.simOperatorName}"
                     + ", ${telephonyManager.networkOperator}" //

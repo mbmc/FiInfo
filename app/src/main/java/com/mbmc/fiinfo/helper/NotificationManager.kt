@@ -2,12 +2,11 @@ package com.mbmc.fiinfo.helper
 
 import android.app.Notification
 import android.app.NotificationChannel
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import com.mbmc.fiinfo.R
 import com.mbmc.fiinfo.data.Event
-import com.mbmc.fiinfo.ui.MainActivity
+import com.mbmc.fiinfo.util.getPendingIntent
+import com.mbmc.fiinfo.util.toNotification
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -21,17 +20,6 @@ class NotificationManager @Inject constructor(@ApplicationContext private val co
     private lateinit var notificationManager: AndroidNotificationManager
 
     fun provide(): Notification {
-        val pendingIntent: PendingIntent =
-            Intent(context, MainActivity::class.java).let { notificationIntent ->
-                notificationIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-                PendingIntent.getActivity(
-                    context,
-                    0,
-                    notificationIntent,
-                    PendingIntent.FLAG_IMMUTABLE
-                )
-            }
-
         builder = Notification.Builder(context, createChannel())
             .setContentTitle(context.getString(R.string.connection_status))
             .setSmallIcon(R.mipmap.ic_launcher)
@@ -39,7 +27,7 @@ class NotificationManager @Inject constructor(@ApplicationContext private val co
                 Notification.BigTextStyle()
                     .bigText(context.getString(R.string.waiting))
             )
-            .setContentIntent(pendingIntent)
+            .setContentIntent(context.getPendingIntent())
 
         return builder.build()
     }

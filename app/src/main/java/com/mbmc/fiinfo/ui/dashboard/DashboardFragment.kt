@@ -38,6 +38,13 @@ class DashboardFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (this::binding.isInitialized) {
+            binding.events.scrollToPosition(0)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindUi()

@@ -16,4 +16,5 @@
     <!--<color name="icon_light">#8a000000</color>-->
     <!-- 8a hex -> 139 decimal -> 0.545 alpha -->
     <color name="font_day">#757575</color>
+    <color name="white_alpha">#BBFFFFFF</color>
 </resources>

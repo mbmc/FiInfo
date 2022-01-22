@@ -5,12 +5,6 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/top"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="@dimen/spacing_default" />
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/start"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -31,7 +25,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/start"
         app:layout_constraintEnd_toEndOf="@id/end"
-        android:layout_marginTop="@dimen/size_20"
+        android:paddingTop="@dimen/size_20"
         android:paddingBottom="@dimen/size_60"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

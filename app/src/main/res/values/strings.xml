@@ -10,8 +10,7 @@
     <string name="auto">Auto</string>
     <string name="backup">Backup</string>
     <string name="cancel">Cancel</string>
-    <string name="carrier">Carrier: %1$s, %2$s</string>
-    <string name="carrier_operator">Carrier: %1$s, %2$s, operated by %3$s</string>
+    <string name="carrier_details">Carrier: %1$s, %2$s</string>
     <string name="cellular_off">Cell off</string>
     <string name="cellular_on">Cell on</string>
     <string name="close">Close</string>
@@ -58,8 +57,8 @@
     <string name="ok">Ok</string>
     <string name="phone_off">Phone off</string>
     <string name="phone_on">Phone on</string>
-    <string name="permissions_required">Phone permission is required for the app to function</string>
-    <string name="permissions_require_settings">Phone permission is required for the app to function. Please change in settings.</string>
+    <string name="permission_required">Phone permission is required for the app to function</string>
+    <string name="permission_required_settings">Phone permission is required for the app to function. Please change in settings.</string>
     <string name="privacy_policy">Privacy policy</string>
     <string name="repair">Repair</string>
     <string name="report">Report</string>
@@ -67,6 +66,8 @@
     <string name="save">Save</string>
     <string name="settings">Settings</string>
     <string name="sign_in">Sign In</string>
+    <string name="speed">%1$s</string>
+    <string name="speed_operator">%1$s, operated by %2$s</string>
     <string name="sprint">Sprint</string>
     <string name="sprint_2">Sprint (2)</string>
     <string name="stats">Stats</string>
@@ -82,7 +83,8 @@
     <string name="waiting">Waiting on connectivity change&#8230;</string>
     <string name="welcome">Complete overhaul to comply with new Android versions. Head over to the settings and active the foreground service to capture all the cellular and Wi-Fi changes.</string>
     <string name="whats_new">What\'s new</string>
-    <string name="wifi">Wi-Fi: %1$s, %2$s</string>
+    <string name="wifi">%1$s, %2$s</string>
+    <string name="wifi_details">Wi-Fi: %1$s</string>
     <string name="wifi_ssid">Wi-Fi SSID</string>
     <string name="wifi_off">Wi-Fi off</string>
     <string name="wifi_on">Wi-Fi on</string>

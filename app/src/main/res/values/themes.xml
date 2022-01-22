@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.SignalInfo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/fi_blue</item>
@@ -5,6 +6,7 @@
         <item name="android:statusBarColor">?attr/colorPrimary</item>
 
         <item name="iconColor">@color/font_day</item>
+        <item name="android:textColorSecondary">@color/font_day</item>
         <item name="android:textColorTertiary">@color/font_day</item>
     </style>
 
@@ -23,5 +25,10 @@
     <style name="Settings.Subtitle" parent="TextAppearance.AppCompat.Small">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Widget" parent="android:style/Theme.DeviceDefault.DayNight">
+        <item name="android:textColorTertiary">@color/font_day</item>
+        <item name="android:tint">@color/font_day</item>
     </style>
 </resources>

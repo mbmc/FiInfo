@@ -3,6 +3,7 @@ package com.mbmc.fiinfo.helper
 import com.mbmc.fiinfo.data.Event
 import com.mbmc.fiinfo.data.Type
 import com.mbmc.fiinfo.database.EventDao
+import com.mbmc.fiinfo.util.toEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,7 +16,7 @@ import javax.inject.Singleton
 @Singleton
 class EventManager @Inject constructor(
     private val eventDao: EventDao,
-    private val notificationManager: NotificationManager
+    private val broadcastManager: BroadcastManager
 ) {
 
     private var lastEvent: Event? = null
@@ -31,7 +32,7 @@ class EventManager @Inject constructor(
     private suspend fun syncLog(event: Event) {
         mutex.withLock {
             if (event.type == Type.DISCONNECTED) {
-                notificationManager.update(event)
+                broadcastManager.update(event)
                 return
             }
 
@@ -51,7 +52,7 @@ class EventManager @Inject constructor(
                 eventDao.addEvent(event.toEntity())
             }
 
-            notificationManager.update(event)
+            broadcastManager.update(event)
         }
     }
 }

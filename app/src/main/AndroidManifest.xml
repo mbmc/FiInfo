@@ -30,12 +30,12 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name="com.mbmc.fiinfo.ui.Application"
+        android:name=".ui.Application"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.SignalInfo">
         <activity
-            android:name="com.mbmc.fiinfo.ui.MainActivity"
+            android:name=".ui.MainActivity"
             android:launchMode="singleTop"
             android:exported="true">
             <intent-filter>
@@ -43,11 +43,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name="com.mbmc.fiinfo.receiver.BootReceiver" android:exported="false">
+        <receiver android:name=".receiver.BootReceiver" android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <service android:name="com.mbmc.fiinfo.service.EventService" android:foregroundServiceType="location" />
+        <receiver
+            android:name="com.mbmc.fiinfo.widget.WidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_provider" />
+        </receiver>
+        <service android:name=".service.EventService" android:foregroundServiceType="location" />
     </application>
 </manifest>

@@ -24,6 +24,14 @@ fun TelephonyManager.toEvent(): Event =
 fun WifiInfo.getDetails(): String =
     "$frequency$FREQUENCY_UNITS"
 
+fun WifiInfo.fixSsid(): String? =
+    ssid?.let {
+        if (it.isNotEmpty() && it == UNKNOWN_SSID) {
+            return "n/a"
+        }
+        return it
+    }
+
 fun getCarrier(mccmnc: String?): Carrier =
     mccmnc?.let {
         FI_MCC_MNC_MAP[it]
@@ -43,14 +51,6 @@ fun getWifiCarrier(mccmnc: String?): WifiCarrier =
 
 fun getOperator(mccmnc: String): String =
     MCC_MNC_MAP[mccmnc] ?: mccmnc
-
-fun fixSsid(ssid: String?): String? =
-    ssid?.let {
-        if (it.isNotEmpty() && it == UNKNOWN_SSID) {
-            return "n/a"
-        }
-        return it
-    }
 
 // TelephonyManager.java
 fun getSpeedDescription(type: Int?): String =

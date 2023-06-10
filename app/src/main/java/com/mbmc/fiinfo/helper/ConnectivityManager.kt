@@ -95,6 +95,11 @@ class ConnectivityManager @Inject constructor(
             return
         }
 
+        // TODO: check why there's an NPE, sometimes
+        if (!(network != null && networkCapabilities != null)) {
+            return
+        }
+
         Log.d(DEBUG_TAG, "onCapabilitiesChanged: $networkCapabilities")
         if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
             val wifiInfo = networkCapabilities.transportInfo as WifiInfo
@@ -161,7 +166,7 @@ class ConnectivityManager @Inject constructor(
             }
         }
 
-        Log.d(DEBUG_TAG, "networks: $networks")
+        Log.d(DEBUG_TAG, "networks: $networks, noLog? $noLog")
         Log.d(DEBUG_TAG, "callback capabilities: $capabilities")
 
         if (noLog) {

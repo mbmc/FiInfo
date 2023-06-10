@@ -34,6 +34,7 @@ now
     WIFI_OFF // 11
     WIFI_ON // 12
  */
+// TODO: some mccmnc and operator are stored as "" instead of null
 val MIGRATION_3_4 = object : Migration(3, 4) {
     override fun migrate(database: SupportSQLiteDatabase) {
         // Fix erroneous empty fields

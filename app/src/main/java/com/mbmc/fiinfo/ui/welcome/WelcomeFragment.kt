@@ -18,7 +18,6 @@ class WelcomeFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = FragmentWelcomeBinding.inflate(layoutInflater)
-        preferenceManager = PreferenceManager(requireContext())
         return AlertDialog.Builder(requireContext())
             .setView(binding.root)
             .setTitle(R.string.whats_new)

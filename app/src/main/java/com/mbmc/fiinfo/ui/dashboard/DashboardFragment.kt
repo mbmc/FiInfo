@@ -68,7 +68,7 @@ class DashboardFragment : Fragment() {
         binding.events.adapter = adapter
 
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.events.collectLatest {
                     binding.progress.visibility = View.GONE
                     adapter.submitData(it)

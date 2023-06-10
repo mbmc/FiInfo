@@ -19,12 +19,11 @@ data class Event(
     override var speed: Int? = null,
 ) : Record, Parcelable {
 
-    // Don't account for timestamp
+    // Don't account for timestamp or frequency
     fun isEqualTo(event: Event): Boolean =
         type == event.type
                 && timezone == event.timezone
                 && ssid == event.ssid
-                && frequency == event.frequency
                 && mccmnc == event.mccmnc
                 && operator == event.operator
                 && speed == event.speed

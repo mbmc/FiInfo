@@ -13,6 +13,7 @@ import com.mbmc.fiinfo.data.Carrier.US_CELLULAR as US_CELLULAR
     https://wammu.eu/tools/networks/
     https://www.mcc-mnc.com/
     https://www.roamingzone.com/mnc/
+    https://mcc-mnc-list.com/list
  */
 val FI_MCC_MNC_MAP: HashMap<String, Carrier> = hashMapOf(
     "3102" to SPRINT,
@@ -1524,5 +1525,23 @@ val MCC_MNC_MAP: HashMap<String, String> = hashMapOf(
     "4214" to "HiTS-Unitel",
     "6481" to "Net One",
     "6483" to "Telecel",
-    "6484" to "Econet"
+    "6484" to "Econet",
+    "312250" to "T-Mobile prev. Sprint",
+    "26201" to "Telekom",
+    "26203" to "O2",
+    "28601" to "Turkcell",
+    "26202" to "Vodafone",
+    "27801" to "Epic",
+    "52501" to "SingTel",
+    "47202" to "Ooredoo",
+    "60400" to "Orange Morocco",
+    "60401" to "IAM",
+    "60402" to "INWI",
+    "52003" to "AIS",
+    "52004" to "TrueMove H",
+    "42001" to "Al Jawal",
+    "41603" to "Umniah",
+    "42502" to "Cellcom",
+    "42503" to "Pelephone",
+    "42004" to "Zain SA"
 )

@@ -4,6 +4,7 @@ import android.app.ActivityManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.location.LocationManager
 import android.net.Uri
 import android.provider.Settings
 import android.widget.ImageView
@@ -19,6 +20,11 @@ fun <T> Context.isServiceForegrounded(service: Class<T>): Boolean =
         ?.getRunningServices(Integer.MAX_VALUE)
         ?.find { it.service.className == service.name }
         ?.foreground == true
+
+fun Context.isLocationServiceEnabled(): Boolean {
+    return (getSystemService(Context.LOCATION_SERVICE) as LocationManager)
+        .isLocationEnabled
+}
 
 fun Fragment.openBrowserIfInstalled(url: String) {
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))

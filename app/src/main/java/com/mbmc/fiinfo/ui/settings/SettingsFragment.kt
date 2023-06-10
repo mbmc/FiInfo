@@ -20,6 +20,7 @@ import com.mbmc.fiinfo.BuildConfig
 import com.mbmc.fiinfo.R
 import com.mbmc.fiinfo.databinding.FragmentSettingsBinding
 import com.mbmc.fiinfo.helper.BackupManager
+import com.mbmc.fiinfo.helper.PreferenceManager
 import com.mbmc.fiinfo.service.EventService
 import com.mbmc.fiinfo.ui.codes.CodesFragment
 import com.mbmc.fiinfo.ui.icons.IconsFragment
@@ -28,6 +29,8 @@ import com.mbmc.fiinfo.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
@@ -36,6 +39,7 @@ class SettingsFragment : Fragment() {
     private lateinit var permissionsChecker: ActivityResultLauncher<Array<String>>
     private lateinit var save: ActivityResultLauncher<Unit>
     private lateinit var restore: ActivityResultLauncher<Unit>
+    @Inject lateinit var preferenceManager: PreferenceManager
 
     private val viewModel: SettingsViewModel by viewModels()
 
@@ -56,7 +60,7 @@ class SettingsFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.result.collect {
                     when (it) {
                         is Result.Success, is Result.Error -> {
@@ -99,16 +103,27 @@ class SettingsFragment : Fragment() {
                 stopService()
             }
         }
+        binding.serviceBootCheck.isChecked = preferenceManager.doesStartOnBoot()
+        binding.serviceBootCheck.setOnCheckedChangeListener { _, checked ->
+            preferenceManager.setStartOnBoot(checked)
+        }
 
         // Wi-Fi SSID
         setWifiSsid()
-        binding.wifiTitle.setOnClickListener {
+        // Location permission
+        binding.wifiPermission.setOnClickListener {
             if (checkPermissions()) {
                 with(requireContext()) {
                     startActivity(Intent().settings(this))
                 }
             } else {
                 permissionsChecker.launch(PERMISSIONS)
+            }
+        }
+        // Location service
+        binding.wifiLocation.setOnClickListener {
+            with(requireContext()) {
+                startActivity(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS))
             }
         }
 
@@ -158,11 +173,19 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setWifiSsid() {
-        binding.wifiSubtitle.text = getString(
+        binding.wifiPermission.text = getString(
             if (checkPermissions()) {
-                R.string.enabled
+                R.string.location_permission_on
             } else {
-                R.string.location_permissions
+                R.string.location_permission_off
+            }
+        )
+
+        binding.wifiLocation.text = getString(
+            if (requireContext().isLocationServiceEnabled()) {
+                R.string.location_service_on
+            } else {
+                R.string.location_service_off
             }
         )
     }

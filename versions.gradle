@@ -9,7 +9,7 @@ ext {
             activity_fragment_ktx: "1.4.0",
             constraintlayout: "2.1.2",
             core_ktx: "1.7.0",
-            gradle_plugin: "7.0.4",
+            gradle_plugin: '7.1.0',
             hilt: "2.40.5",
             lifecycle: "2.4.0",
             material: "1.4.0",
@@ -21,8 +21,8 @@ ext {
     app = [
             id: "com.mbmc.fiinfo",
             release: [
-                    version: "0.2.1",
-                    code: 16
+                    version: "0.2.3",
+                    code: 18
             ]
     ]
 }

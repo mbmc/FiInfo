@@ -42,15 +42,17 @@
     <string name="delete_all">Delete all events</string>
     <string name="disconnected">Disconnected</string>
     <string name="dont_show">Don\'t show this again</string>
-    <string name="enabled">Enabled</string>
     <string name="events">Events</string>
     <string name="foreground_service">Foreground service</string>
-    <string name="foreground_service_off">Turning off will greatly reduce the usefulness of the app</string>
+    <string name="foreground_service_on">Turn on to enable all the features</string>
     <string name="google_fi">Google Fi</string>
     <string name="help">Help</string>
     <string name="icons_legend">Icons legend</string>
     <string name="info">Info</string>
-    <string name="location_permissions">Requires Location permission</string>
+    <string name="location_permission_on">Location permission: granted</string>
+    <string name="location_permission_off">Location permission: required</string>
+    <string name="location_service_on">Location service: enabled</string>
+    <string name="location_service_off">Location service: required</string>
     <string name="multi_sim">Multi SIM</string>
     <string name="next">Next</string>
     <string name="no_browser">Can\'t open any browser</string>
@@ -71,6 +73,7 @@
     <string name="sprint">Sprint</string>
     <string name="sprint_2">Sprint (2)</string>
     <string name="stats">Stats</string>
+    <string name="start_boot">Start on boot</string>
     <string name="sure">Are you sure?</string>
     <string name="t_mobile">T-Mobile</string>
     <string name="three_at">Three AT</string>
@@ -86,6 +89,7 @@
     <string name="wifi">%1$s, %2$s</string>
     <string name="wifi_details">Wi-Fi: %1$s</string>
     <string name="wifi_ssid">Wi-Fi SSID</string>
+    <string name="wifi_ssid_on">Both need to be enabled to get the SSID</string>
     <string name="wifi_off">Wi-Fi off</string>
     <string name="wifi_on">Wi-Fi on</string>
 </resources>

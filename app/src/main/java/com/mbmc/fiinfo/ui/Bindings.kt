@@ -26,7 +26,10 @@ fun setImageViewResource(imageView: ImageView, record: Record) {
 
 @BindingAdapter("android:date")
 fun setDate(textView: TextView, event: Event) {
-    textView.text = getDate(event.timestamp.toLong(), event.timezone)
+    // TODO: check why there's an NPE, sometimes
+    if (textView != null && event != null) {
+        textView.text = getDate(event.timestamp.toLong(), event.timezone)
+    }
 }
 
 @BindingAdapter("android:details")

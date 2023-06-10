@@ -23,20 +23,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/service_toggle"
             android:layout_marginEnd="@dimen/size_20"
-            android:text="@string/foreground_service_off" />
+            android:text="@string/foreground_service_on" />
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/service_toggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/service_title"
-            app:layout_constraintBottom_toBottomOf="@id/service_subtitle"
             app:layout_constraintEnd_toEndOf="parent" />
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/service_boot_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/service_subtitle"
+            app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/service_boot"
+            style="@style/Settings.Action"
+            app:layout_constraintTop_toTopOf="@id/service_boot_check"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/service_boot_check"
+            android:text="@string/start_boot" />
 
         <TextView
             android:id="@+id/wifi_title"
             style="@style/Settings.Title"
             android:layout_marginTop="@dimen/size_20"
-            app:layout_constraintTop_toBottomOf="@id/service_subtitle"
+            app:layout_constraintTop_toBottomOf="@id/service_boot_check"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/wifi_ssid" />
@@ -45,13 +57,26 @@
             style="@style/Settings.Subtitle"
             app:layout_constraintTop_toBottomOf="@id/wifi_title"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="@dimen/size_10"
+            android:text="@string/wifi_ssid_on" />
+        <TextView
+            android:id="@+id/wifi_permission"
+            style="@style/Settings.Action"
+            app:layout_constraintTop_toBottomOf="@id/wifi_subtitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/wifi_location"
+            style="@style/Settings.Action"
+            app:layout_constraintTop_toBottomOf="@id/wifi_permission"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/fi_title"
             style="@style/Settings.Title"
             android:layout_marginTop="@dimen/size_20"
-            app:layout_constraintTop_toBottomOf="@id/wifi_subtitle"
+            app:layout_constraintTop_toBottomOf="@id/wifi_location"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/google_fi" />

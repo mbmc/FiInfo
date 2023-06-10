@@ -43,6 +43,9 @@ class EventManager @Inject constructor(
             }
 
             if (lastEvent?.isEqualTo(event) == true) {
+                // Same event recorded as before, but we might want to broadcast it,
+                // in case the previous status was disconnected
+                broadcastManager.update(event)
                 return
             }
 

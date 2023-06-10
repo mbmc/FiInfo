@@ -23,6 +23,13 @@ class PreferenceManager @Inject constructor(@ApplicationContext private val cont
         setBoolean(WELCOME, true)
     }
 
+    fun doesStartOnBoot(): Boolean =
+        sharedPreferences.getBoolean(BOOT, false)
+
+    fun setStartOnBoot(start: Boolean) {
+        setBoolean(BOOT, start)
+    }
+
     private fun setBoolean(key: String, value: Boolean) {
         sharedPreferences.edit().apply {
             putBoolean(key, value)
@@ -33,5 +40,6 @@ class PreferenceManager @Inject constructor(@ApplicationContext private val cont
         private const val FILE = "preferences"
         private const val CODE_INSTRUCTIONS = "code_instructions"
         private const val WELCOME = "welcome_v0.2.0"
+        private const val BOOT = "start_on_boot"
     }
 }
